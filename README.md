@@ -7,4 +7,4 @@ A vehicle with m compartments transports q different products of various sizes f
     Song Tailai
     Zhao Zhiqiang
     Wang Di
-    Cheng Yu"# operational-research-project" 
+    Cheng Yu

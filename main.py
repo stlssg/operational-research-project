@@ -4,10 +4,8 @@ import json
 import logging
 import numpy as np
 from simulator.instance import Instance
-from simulator.tester import Tester
 from solver.simpleTruckLoading import SimpleTruckLoading
 from heuristic.simpleHeu import SimpleHeu
-from solver.sampler import Sampler
 from utility.plot_results import plot_comparison_hist
 
 np.random.seed(0)
@@ -39,38 +37,7 @@ if __name__ == '__main__':
     )
     print(of_exact, sol_exact, comp_time_exact)
     
-    # COMPARISON:
-    # test = Tester()
-    # n_scenarios = 1000
-    # reward_1 = sam.sample_stoch(
-    #     inst,
-    #     n_scenarios=n_scenarios
-    # )
-    # ris1 = test.solve_second_stages(
-    #     inst,
-    #     sol_exact,
-    #     n_scenarios,
-    #     reward_1
-    # )
-    # reward_2 = sam.sample_stoch(
-    #     inst,
-    #     n_scenarios=n_scenarios
-    # )
-    # ris2 = test.solve_second_stages(
-    #     inst,
-    #     sol_exact,
-    #     n_scenarios,
-    #     reward_2
-    # )
-    # plot_comparison_hist(
-    #     [ris1, ris2],
-    #     ["run1", "run2"],
-    #     ['red', 'blue'],
-    #     "profit", "occurencies"
-    # )
-
-    # sam = Sampler()
-
+    
     '''
     # Reward generation
     n_scenarios = 5

@@ -36,9 +36,9 @@ if __name__ == '__main__':
     )
     print(of_exact, sol_exact, comp_time_exact)
     
-    heu_1 = SimpleHeu(0.03, dict_data)
-    of_heu, sol_heu, comp_time_heu = heu_1.solve()
-    print(of_heu, sol_heu, comp_time_heu)
+    # heu_1 = SimpleHeu(0.03, dict_data)
+    # of_heu, sol_heu, comp_time_heu = heu_1.solve()
+    # print(of_heu, sol_heu, comp_time_heu)
 
     '''
     heu = SimpleHeu(2)

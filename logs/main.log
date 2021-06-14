@@ -1,68 +1,68 @@
-23:24:49 INFO: starting simulation...
-23:24:49 INFO: num_compartments: 3
-23:24:49 INFO: num_products: 3
-23:24:49 INFO: num_destinations: 2
-23:24:49 INFO: capacity_compartments: [709.76270079 743.03787327 720.55267521]
-23:24:49 INFO: size_package: [20.44883183 19.23654799 21.45894113]
-23:24:49 INFO: demand: [array([14., 22., 23.]), array([ 7., 15., 10.])]
-23:24:49 INFO: simulation end
-23:24:49 INFO: getting data from instance...
-23:24:49 INFO: SimpleTruckLoadingProblem
-23:24:49 INFO: Academic license - for non-commercial use only - expires 2021-08-08
-23:24:49 INFO: Using license file C:\Users\54498\gurobi.lic
-23:24:49 INFO: Changed value of parameter MIPgap to 0.001
-23:24:49 INFO:    Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
-23:24:49 INFO: Changed value of parameter TimeLimit to 10.0
-23:24:49 INFO:    Prev: inf  Min: 0.0  Max: inf  Default: inf
-23:24:49 INFO: Parameter OutputFlag unchanged
-23:24:49 INFO:    Value: 1  Min: 0  Max: 1  Default: 1
-23:24:49 INFO: Changed value of parameter LogFile to ./logs/gurobi.log
-23:24:49 INFO:    Prev:   Default: 
-23:24:49 INFO: Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
-23:24:49 INFO: Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-23:24:49 INFO: Optimize a model with 15 rows, 19 columns and 66 nonzeros
-23:24:49 INFO: Model fingerprint: 0x40d54c6f
-23:24:49 INFO: Variable types: 1 continuous, 18 integer (0 binary)
-23:24:49 INFO: Coefficient statistics:
-23:24:49 INFO:   Matrix range     [1e+00, 2e+01]
-23:24:49 INFO:   Objective range  [1e+00, 1e+00]
-23:24:49 INFO:   Bounds range     [0e+00, 0e+00]
-23:24:49 INFO:   RHS range        [7e+02, 7e+02]
-23:24:49 INFO: Found heuristic solution: objective -0.0000000
-23:24:49 INFO: Presolve removed 6 rows and 0 columns
-23:24:49 INFO: Presolve time: 0.02s
-23:24:49 INFO: Presolved: 9 rows, 19 columns, 42 nonzeros
-23:24:49 INFO: Variable types: 1 continuous, 18 integer (0 binary)
-23:24:49 INFO: 
-23:24:49 INFO: Root relaxation: objective 1.175216e+00, 17 iterations, 0.00 seconds
-23:24:49 INFO: 
-23:24:49 INFO:     Nodes    |    Current Node    |     Objective Bounds      |     Work
-23:24:49 INFO:  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-23:24:49 INFO: 
-23:24:49 INFO:      0     0    1.17522    0    8   -0.00000    1.17522      -     -    0s
-23:24:49 INFO: H    0     0                       0.9285714    1.17522  26.6%     -    0s
-23:24:49 INFO: H    0     0                       1.1304348    1.17522  3.96%     -    0s
-23:24:49 INFO: H    0     0                       1.1363636    1.17522  3.42%     -    0s
-23:24:49 INFO:      0     0    1.16434    0    9    1.13636    1.16434  2.46%     -    0s
-23:24:49 INFO:      0     0    1.16434    0   10    1.13636    1.16434  2.46%     -    0s
-23:24:49 INFO:      0     0    1.15876    0    8    1.13636    1.15876  1.97%     -    0s
-23:24:49 INFO:      0     0    1.15876    0    8    1.13636    1.15876  1.97%     -    0s
-23:24:49 INFO:      0     0    1.15631    0   10    1.13636    1.15631  1.76%     -    0s
-23:24:49 INFO:      0     0    1.15631    0   10    1.13636    1.15631  1.76%     -    0s
-23:24:49 INFO:      0     0    1.15522    0    8    1.13636    1.15522  1.66%     -    0s
-23:24:49 INFO:      0     0    1.15373    0    7    1.13636    1.15373  1.53%     -    0s
-23:24:49 INFO:      0     0    1.15317    0    8    1.13636    1.15317  1.48%     -    0s
-23:24:49 INFO:      0     2    1.15317    0    8    1.13636    1.15317  1.48%     -    0s
-23:24:49 INFO: 
-23:24:49 INFO: Cutting planes:
-23:24:49 INFO:   Gomory: 3
-23:24:49 INFO:   MIR: 9
-23:24:49 INFO:   StrongCG: 3
-23:24:49 INFO: 
-23:24:49 INFO: Explored 2306 nodes (4523 simplex iterations) in 0.24 seconds
-23:24:49 INFO: Thread count was 8 (of 8 available processors)
-23:24:49 INFO: 
-23:24:49 INFO: Solution count 4: 1.13636 1.13043 0.928571 -0 
-23:24:49 INFO: 
-23:24:49 INFO: Optimal solution found (tolerance 1.00e-03)
-23:24:49 INFO: Best objective 1.136363636364e+00, best bound 1.136363636364e+00, gap 0.0000%
+00:53:17 INFO: starting simulation...
+00:53:17 INFO: num_compartments: 3
+00:53:17 INFO: num_products: 3
+00:53:17 INFO: num_destinations: 2
+00:53:17 INFO: capacity_compartments: [709.76270079 743.03787327 720.55267521]
+00:53:17 INFO: size_package: [20.44883183 19.23654799 21.45894113]
+00:53:17 INFO: demand: [array([14., 22., 23.]), array([ 7., 15., 10.])]
+00:53:17 INFO: simulation end
+00:53:17 INFO: getting data from instance...
+00:53:17 INFO: SimpleTruckLoadingProblem
+00:53:17 INFO: Academic license - for non-commercial use only - expires 2021-08-08
+00:53:17 INFO: Using license file C:\Users\54498\gurobi.lic
+00:53:17 INFO: Changed value of parameter MIPgap to 0.001
+00:53:17 INFO:    Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+00:53:17 INFO: Changed value of parameter TimeLimit to 10.0
+00:53:17 INFO:    Prev: inf  Min: 0.0  Max: inf  Default: inf
+00:53:17 INFO: Parameter OutputFlag unchanged
+00:53:17 INFO:    Value: 1  Min: 0  Max: 1  Default: 1
+00:53:17 INFO: Changed value of parameter LogFile to ./logs/gurobi.log
+00:53:17 INFO:    Prev:   Default: 
+00:53:17 INFO: Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+00:53:17 INFO: Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+00:53:17 INFO: Optimize a model with 15 rows, 19 columns and 66 nonzeros
+00:53:17 INFO: Model fingerprint: 0x40d54c6f
+00:53:17 INFO: Variable types: 1 continuous, 18 integer (0 binary)
+00:53:17 INFO: Coefficient statistics:
+00:53:17 INFO:   Matrix range     [1e+00, 2e+01]
+00:53:17 INFO:   Objective range  [1e+00, 1e+00]
+00:53:17 INFO:   Bounds range     [0e+00, 0e+00]
+00:53:17 INFO:   RHS range        [7e+02, 7e+02]
+00:53:17 INFO: Found heuristic solution: objective -0.0000000
+00:53:17 INFO: Presolve removed 6 rows and 0 columns
+00:53:17 INFO: Presolve time: 0.01s
+00:53:17 INFO: Presolved: 9 rows, 19 columns, 42 nonzeros
+00:53:17 INFO: Variable types: 1 continuous, 18 integer (0 binary)
+00:53:17 INFO: 
+00:53:17 INFO: Root relaxation: objective 1.175216e+00, 17 iterations, 0.00 seconds
+00:53:17 INFO: 
+00:53:17 INFO:     Nodes    |    Current Node    |     Objective Bounds      |     Work
+00:53:17 INFO:  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+00:53:17 INFO: 
+00:53:17 INFO:      0     0    1.17522    0    8   -0.00000    1.17522      -     -    0s
+00:53:17 INFO: H    0     0                       0.9285714    1.17522  26.6%     -    0s
+00:53:17 INFO: H    0     0                       1.1304348    1.17522  3.96%     -    0s
+00:53:17 INFO: H    0     0                       1.1363636    1.17522  3.42%     -    0s
+00:53:17 INFO:      0     0    1.16434    0    9    1.13636    1.16434  2.46%     -    0s
+00:53:17 INFO:      0     0    1.16434    0   10    1.13636    1.16434  2.46%     -    0s
+00:53:17 INFO:      0     0    1.15876    0    8    1.13636    1.15876  1.97%     -    0s
+00:53:17 INFO:      0     0    1.15876    0    8    1.13636    1.15876  1.97%     -    0s
+00:53:17 INFO:      0     0    1.15631    0   10    1.13636    1.15631  1.76%     -    0s
+00:53:17 INFO:      0     0    1.15631    0   10    1.13636    1.15631  1.76%     -    0s
+00:53:17 INFO:      0     0    1.15522    0    8    1.13636    1.15522  1.66%     -    0s
+00:53:17 INFO:      0     0    1.15373    0    7    1.13636    1.15373  1.53%     -    0s
+00:53:17 INFO:      0     0    1.15317    0    8    1.13636    1.15317  1.48%     -    0s
+00:53:17 INFO:      0     2    1.15317    0    8    1.13636    1.15317  1.48%     -    0s
+00:53:18 INFO: 
+00:53:18 INFO: Cutting planes:
+00:53:18 INFO:   Gomory: 3
+00:53:18 INFO:   MIR: 9
+00:53:18 INFO:   StrongCG: 3
+00:53:18 INFO: 
+00:53:18 INFO: Explored 2306 nodes (4523 simplex iterations) in 0.24 seconds
+00:53:18 INFO: Thread count was 8 (of 8 available processors)
+00:53:18 INFO: 
+00:53:18 INFO: Solution count 4: 1.13636 1.13043 0.928571 -0 
+00:53:18 INFO: 
+00:53:18 INFO: Optimal solution found (tolerance 1.00e-03)
+00:53:18 INFO: Best objective 1.136363636364e+00, best bound 1.136363636364e+00, gap 0.0000%

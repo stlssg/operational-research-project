@@ -27,7 +27,6 @@ if __name__ == '__main__':
     dict_data = inst.get_data()
     print(dict_data)
     
-    num_repetition = 100
     prb = SimpleTruckLoading()
     of_exact, sol_exact, comp_time_exact = prb.solve(
         dict_data,
@@ -37,30 +36,9 @@ if __name__ == '__main__':
     )
     print(of_exact, sol_exact, comp_time_exact)
     
-    
-    '''
-    # Reward generation
-    n_scenarios = 5
-    reward = sam.sample_stoch(
-        inst,
-        n_scenarios=n_scenarios
-    )
-
-    heu = SimpleHeu()
-    of_heu, sol_heu, comp_time_heu = heu.solve(
-        dict_data,
-        reward,
-        n_scenarios,
-    )
+    heu_1 = SimpleHeu(0.03, dict_data)
+    of_heu, sol_heu, comp_time_heu = heu_1.solve()
     print(of_heu, sol_heu, comp_time_heu)
-
-    # mean_reward = sam.sample_ev(
-    #     inst,
-    #     n_scenarios=n_scenarios
-    # )
-    # print(mean_reward)
-    '''
-
 
     '''
     heu = SimpleHeu(2)

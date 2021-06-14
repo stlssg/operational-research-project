@@ -2,31 +2,40 @@
 import time
 import math
 import logging
+import functools
 
 class SimpleHeu():
-    def __init__(self):
-        pass
-
-    def solve(
-        self, dict_data, reward, n_scenarios,
-    ):
-        sol_x = [0] * dict_data['n_items']
-        of = -1
+    def __init__(self, epsilong, dict_data):
+        self.t_lb = 1.0 # lower bound
+        self.ite = 0 # iteration
+        self.eps = epsilong # ending condition
+        self.data = dict_data
         
+        
+    def solve(self):
+        # main algorithm
         start = time.time()
-        ratio = [0] * dict_data['n_items']
-        for i in range(dict_data['n_items']):
-            ratio[i] = dict_data['profits'][i] / dict_data['sizes'][i]
-        sorted_pos = [ratio.index(x) for x in sorted(ratio)]
-        sorted_pos.reverse()
-        cap_tmp = 0
-        for i, item in enumerate(sorted_pos):
-            cap_tmp += dict_data['sizes'][item]
-            if cap_tmp > dict_data['max_size']:
-                break
-            sol_x[item] = 1
+        C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"])
+        sum_pk_djk = 0
+        for k in range(self.data['size_package']):
+            for j in range(self.data['num_destinations']):
+                sum_pk_djk += self.data['size_package'][k] * self.data['demand'][j][k]
+        self.t_ub = C_total / sum_pk_djk # upper bound with relaxation
+        t_l = (self.t_lb + self.t_ub) / 2
+        
+        while self.t_ub - self.t_lb > self.eps:
+            of, sol_x, condition = SimpleHeu.sub_algorithm()
+            if condition == 'yes': # there exists a feasible solution
+                self.t_lb = t_l
+            elif condition == 'no': # there's no feasible solutions
+                self.t_ub = t_l
+            t_l = (self.t_lb + self.t_ub) / 2
+            self.ite += 1
+        
         end = time.time()
-
         comp_time = end - start
         
         return of, sol_x, comp_time
+        
+    def sub_algorithm(self):
+        pass

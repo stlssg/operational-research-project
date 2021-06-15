@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-from matplotlib import pyplot
 import matplotlib.pyplot as plt
 
 
-def plot_comparison_hist(values, labels, colors, x_label, y_label):
-    for i, item in enumerate(values):
-        pyplot.hist(item, color=colors[i], bins=100, alpha=0.5, label=labels[i])
-    pyplot.xlabel(x_label)
-    pyplot.ylabel(y_label)
-    pyplot.legend(loc='upper left')
-    pyplot.savefig(f"./results/hist_profit.png")
-    pyplot.close()
+def plot_result_and_comparison(result_exact, result_heu, result_gap):
+    plt.figure()
+    plt.hist(result_gap, bins=50, alpha=0.5)
+    plt.xlabel('gap[%]')
+    plt.ylabel("occurencies")
+    plt.savefig(f"./results/hist_gap.png")
+    plt.close()
+    
+    plt.figure()
+    plt.plot(result_exact, label = 'exact solution')
+    plt.plot(result_heu, label ='heuristic solution')
+    plt.xlabel('seed')
+    plt.ylabel("objective function")
+    plt.legend()
+    plt.savefig(f"./results/result.png")
+    plt.close()

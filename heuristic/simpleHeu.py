@@ -95,10 +95,11 @@ class SimpleHeu():
                     output = "no"
                     break
         if output == "yes":
-            t_s = S_jk[0][0] / D_jk[0][0]
+            t_s = S_jk[0][0] / self.data['demand'][0][0]
             for j in  range(self.data['num_destinations']):
                 for k in range(self.data['num_products']):
-                    temp = S_jk[j][k] / D_jk[j][k]
+                    if self.data['demand'] == 0: continue
+                    temp = S_jk[j][k] / self.data['demand'][j][k]
                     if temp < t_s:
                         t_s = temp
             if t_s > self.t_l:

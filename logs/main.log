@@ -1,78 +1,9 @@
-02:24:08 INFO: starting simulation...
-02:24:08 INFO: num_compartments: 3
-02:24:08 INFO: num_products: 3
-02:24:08 INFO: num_destinations: 3
-02:24:08 INFO: capacity_compartments: [709.76270079 743.03787327 720.55267521]
-02:24:08 INFO: size_package: [20.44883183 19.23654799 21.45894113]
-02:24:08 INFO: demand: [array([14., 22., 23.]), array([ 7., 15., 10.]), array([18., 25.,  9.])]
-02:24:08 INFO: simulation end
-02:24:08 INFO: getting data from instance...
-02:24:08 INFO: SimpleTruckLoadingProblem
-02:24:08 INFO: Academic license - for non-commercial use only - expires 2021-08-08
-02:24:08 INFO: Using license file C:\Users\54498\gurobi.lic
-02:24:08 INFO: Changed value of parameter MIPgap to 0.001
-02:24:08 INFO:    Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
-02:24:08 INFO: Changed value of parameter TimeLimit to 10.0
-02:24:08 INFO:    Prev: inf  Min: 0.0  Max: inf  Default: inf
-02:24:08 INFO: Parameter OutputFlag unchanged
-02:24:08 INFO:    Value: 1  Min: 0  Max: 1  Default: 1
-02:24:08 INFO: Changed value of parameter LogFile to ./logs/gurobi.log
-02:24:08 INFO:    Prev:   Default: 
-02:24:08 INFO: Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
-02:24:08 INFO: Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-02:24:08 INFO: Optimize a model with 21 rows, 28 columns and 99 nonzeros
-02:24:08 INFO: Model fingerprint: 0x85ba2b5c
-02:24:08 INFO: Variable types: 1 continuous, 27 integer (0 binary)
-02:24:08 INFO: Coefficient statistics:
-02:24:08 INFO:   Matrix range     [1e+00, 3e+01]
-02:24:08 INFO:   Objective range  [1e+00, 1e+00]
-02:24:08 INFO:   Bounds range     [0e+00, 0e+00]
-02:24:08 INFO:   RHS range        [7e+02, 7e+02]
-02:24:08 INFO: Found heuristic solution: objective -0.0000000
-02:24:08 INFO: Presolve removed 9 rows and 0 columns
-02:24:08 INFO: Presolve time: 0.00s
-02:24:08 INFO: Presolved: 12 rows, 28 columns, 63 nonzeros
-02:24:08 INFO: Variable types: 1 continuous, 27 integer (0 binary)
-02:24:08 INFO: 
-02:24:08 INFO: Root relaxation: objective 7.516493e-01, 18 iterations, 0.00 seconds
-02:24:08 INFO: 
-02:24:08 INFO:     Nodes    |    Current Node    |     Objective Bounds      |     Work
-02:24:08 INFO:  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-02:24:08 INFO: 
-02:24:08 INFO:      0     0    0.75165    0   11   -0.00000    0.75165      -     -    0s
-02:24:08 INFO: H    0     0                       0.5714286    0.75165  31.5%     -    0s
-02:24:08 INFO: H    0     0                       0.6000000    0.75165  25.3%     -    0s
-02:24:08 INFO: H    0     0                       0.6521739    0.75165  15.3%     -    0s
-02:24:08 INFO: H    0     0                       0.6956522    0.75165  8.05%     -    0s
-02:24:08 INFO: H    0     0                       0.7000000    0.75165  7.38%     -    0s
-02:24:08 INFO:      0     0    0.73647    0   13    0.70000    0.73647  5.21%     -    0s
-02:24:08 INFO: H    0     0                       0.7142857    0.73647  3.11%     -    0s
-02:24:08 INFO:      0     0    0.72821    0   11    0.71429    0.72821  1.95%     -    0s
-02:24:08 INFO:      0     0    0.72803    0   12    0.71429    0.72803  1.92%     -    0s
-02:24:08 INFO: H    0     0                       0.7200000    0.72803  1.11%     -    0s
-02:24:08 INFO:      0     0    0.72750    0   12    0.72000    0.72750  1.04%     -    0s
-02:24:08 INFO:      0     0    0.72723    0   12    0.72000    0.72723  1.00%     -    0s
-02:24:08 INFO:      0     0    0.72499    0   13    0.72000    0.72499  0.69%     -    0s
-02:24:08 INFO:      0     0    0.72383    0   11    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0   10    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    8    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    7    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    7    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    7    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    8    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    9    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     0    0.72383    0    9    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO:      0     2    0.72383    0    9    0.72000    0.72383  0.53%     -    0s
-02:24:08 INFO: 
-02:24:08 INFO: Cutting planes:
-02:24:08 INFO:   Gomory: 1
-02:24:08 INFO:   MIR: 8
-02:24:08 INFO:   Inf proof: 2
-02:24:08 INFO: 
-02:24:08 INFO: Explored 3355 nodes (6360 simplex iterations) in 0.18 seconds
-02:24:08 INFO: Thread count was 8 (of 8 available processors)
-02:24:08 INFO: 
-02:24:08 INFO: Solution count 8: 0.72 0.714286 0.7 ... -0
-02:24:08 INFO: 
-02:24:08 INFO: Optimal solution found (tolerance 1.00e-03)
-02:24:08 INFO: Best objective 7.200000000000e-01, best bound 7.200000020617e-01, gap 0.0000%
+20:58:44 INFO: starting simulation...
+20:58:44 INFO: num_compartments: 3
+20:58:44 INFO: num_products: 4
+20:58:44 INFO: num_destinations: 4
+20:58:44 INFO: capacity_compartments: [783.40440094 844.06489869 700.02287496]
+20:58:44 INFO: size_package: [18.02332573 16.46755891 15.92338595 16.86260211]
+20:58:44 INFO: demand: [array([12., 13., 16., 14.]), array([13.,  4., 17.,  1.]), array([20., 16., 18., 11.]), array([ 9., 17., 20., 10.])]
+20:58:44 INFO: simulation end
+20:58:44 INFO: getting data from instance...

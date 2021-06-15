@@ -10,6 +10,8 @@ class SimpleTruckLoading():
         pass
 
     def solve(self, dict_data, time_limit=None, gap=None, verbose=False):
+        start = time.time()
+        
         compartments = range(dict_data['num_compartments']) # i
         destinations = range(dict_data['num_destinations']) # j
         products = range(dict_data['num_products']) # k
@@ -61,7 +63,6 @@ class SimpleTruckLoading():
         model.setParam('LogFile', './logs/gurobi.log')
         model.write("./logs/model.lp")
 
-        start = time.time()
         model.optimize()
         end = time.time()
         comp_time = end - start

@@ -6,7 +6,7 @@ import functools
 
 class SimpleHeu():
     def __init__(self, epsilong, dict_data):
-        self.t_lb = 1.0 # lower bound
+        self.t_lb = 0.0 # lower bound
         self.ite = 0 # iteration
         self.eps = epsilong # ending condition
         self.data = dict_data

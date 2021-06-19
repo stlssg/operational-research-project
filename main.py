@@ -30,8 +30,8 @@ if __name__ == '__main__':
     prb = SimpleTruckLoading()
     of_exact, sol_exact, comp_time_exact = prb.solve(
         dict_data,
-        # time_limit = 5,
-        # gap = 0.1 / 100,
+        time_limit = 5,
+        gap = 0.1 / 100,
         verbose=True
     )
     print(of_exact, sol_exact, comp_time_exact)
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     result_exact = []
     result_heu = []
     result_gap = []
-    for seed in range(0,101):
+    for seed in range(0,201):
         np.random.seed(seed)
         inst = Instance(sim_setting)
         dict_data = inst.get_data()

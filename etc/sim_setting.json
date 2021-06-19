@@ -1,9 +1,9 @@
 {
 	"num_compartments": 4,
-	"num_products": 4,
-	"num_destinations": 4,
-	"low_capacity_compartments": 900,
-	"high_capacity_compartments": 1100,
+	"num_products": 6,
+	"num_destinations": 8,
+	"low_capacity_compartments": 1500,
+	"high_capacity_compartments": 1700,
 	"low_size_package": 15,
 	"high_size_package": 25,
 	"low_demand": 10,

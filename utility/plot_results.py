@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def plot_result_and_comparison(result_exact, result_heu, result_gap):
     plt.figure()
-    plt.hist(result_gap, bins=50, alpha=0.5)
+    plt.hist(result_gap, bins=100, alpha=0.8)
     plt.xlabel('gap[%]')
     plt.ylabel("occurencies")
     plt.savefig(f"./results/hist_gap.png")

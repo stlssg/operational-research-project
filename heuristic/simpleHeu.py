@@ -3,6 +3,7 @@ import time
 import math
 import logging
 import functools
+import numpy as np
 
 class SimpleHeu():
     def __init__(self, epsilong, dict_data):
@@ -14,6 +15,14 @@ class SimpleHeu():
     def solve(self):
         # main algorithm
         start = time.time()
+        
+        # sort the product package sizes from big to small and modify the demand accordingly
+        temp_list = np.sort(self.data['size_package'])[::-1]
+        idx_list = np.argsort(self.data['size_package'])[::-1]
+        self.data['size_package'] = temp_list
+        for j in range(self.data['num_destinations']):
+            self.data['demand'][j] = [self.data['demand'][j][i] for i in idx_list]
+            
         C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"])
         sum_pk_djk = 0
         for k in range(self.data['num_products']):

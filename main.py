@@ -21,24 +21,27 @@ if __name__ == '__main__':
     sim_setting = json.load(fp)
     fp.close()
     
-    np.random.seed(1)
+    np.random.seed(0)
     inst = Instance(sim_setting)
     dict_data = inst.get_data()
     print(dict_data)
     
-    # prb = SimpleTruckLoading()
-    # of_exact, sol_exact, comp_time_exact = prb.solve(
-    #     dict_data,
-    #     # time_limit = 5,
-    #     # gap = 0.1 / 100,
-    #     verbose=True
-    # )
-    # print(of_exact, sol_exact, comp_time_exact)
+    # exact solution from gurobi
+    prb = SimpleTruckLoading()
+    of_exact, sol_exact, comp_time_exact = prb.solve(
+        dict_data,
+        # time_limit = 5,
+        # gap = 0.1 / 100,
+        verbose=True
+    )
+    print(of_exact, sol_exact, comp_time_exact)
     
-    # heu_1 = SimpleHeu(0.03, dict_data)
-    # of_heu, sol_heu, comp_time_heu = heu_1.solve()
-    # print(of_heu, sol_heu, comp_time_heu)
+    # first heuristic method and solution
+    heu_1 = SimpleHeu(0.03, dict_data)
+    of_heu, sol_heu, comp_time_heu = heu_1.solve()
+    print(of_heu, sol_heu, comp_time_heu)
     
+    # comparison for different seeds
     result_exact = []
     result_heu = []
     result_gap = []

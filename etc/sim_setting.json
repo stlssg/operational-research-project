@@ -1,7 +1,7 @@
 {
 	"num_compartments": 3,
-	"num_products": 4,
-	"num_destinations": 4,
+	"num_products": 3,
+	"num_destinations": 2,
 	"low_capacity_compartments": 700,
 	"high_capacity_compartments": 900,
 	"low_size_package": 15,

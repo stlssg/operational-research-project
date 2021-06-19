@@ -35,40 +35,40 @@ if __name__ == '__main__':
     # )
     # print(of_exact, sol_exact, comp_time_exact)
     
-    heu_1 = SimpleHeu(0.03, dict_data)
-    of_heu, sol_heu, comp_time_heu = heu_1.solve()
-    print(of_heu, sol_heu, comp_time_heu)
+    # heu_1 = SimpleHeu(0.03, dict_data)
+    # of_heu, sol_heu, comp_time_heu = heu_1.solve()
+    # print(of_heu, sol_heu, comp_time_heu)
     
-    # result_exact = []
-    # result_heu = []
-    # result_gap = []
-    # for seed in range(0,101):
-    #     np.random.seed(seed)
-    #     inst = Instance(sim_setting)
-    #     dict_data = inst.get_data()
-    #     print(dict_data)
+    result_exact = []
+    result_heu = []
+    result_gap = []
+    for seed in range(0,101):
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        print(dict_data)
         
-    #     prb = SimpleTruckLoading()
-    #     of_exact, sol_exact, comp_time_exact = prb.solve(
-    #         dict_data,
-    #         time_limit = 5,
-    #         gap = 0.1 / 100,
-    #         verbose=True
-    #     )
-    #     print(of_exact, sol_exact, comp_time_exact)
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        print(of_exact, sol_exact, comp_time_exact)
         
-    #     heu_1 = SimpleHeu(0.03, dict_data)
-    #     of_heu, sol_heu, comp_time_heu = heu_1.solve()
-    #     print(of_heu, sol_heu, comp_time_heu)
+        heu_1 = SimpleHeu(0.03, dict_data)
+        of_heu, sol_heu, comp_time_heu = heu_1.solve()
+        print(of_heu, sol_heu, comp_time_heu)
         
-    #     if of_exact != -1:
-    #         result_exact.append(of_exact)
-    #         result_heu.append(of_heu)
-    #         gap = (of_heu - of_exact) / of_exact * 100
-    #         result_gap.append(gap)
+        if of_exact != -1:
+            result_exact.append(of_exact)
+            result_heu.append(of_heu)
+            gap = (of_heu - of_exact) / of_exact * 100
+            result_gap.append(gap)
         
-    # # plot for result and comparison
-    # plot_result_and_comparison(result_exact, result_heu, result_gap)
+    # plot for result and comparison
+    plot_result_and_comparison(result_exact, result_heu, result_gap)
 
     '''
     # printing results of a file

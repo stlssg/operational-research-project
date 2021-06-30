@@ -44,12 +44,12 @@ class SimpleTruckLoading():
                 f"capacity_constraint_{i}_compartments"
             )
             
-        for j in destinations:
-            for k in products:
-                model.addConstr(
-                    T * dict_data['demand'][j][k] <= gp.quicksum(X[i,j,k] for i in compartments),
-                    f"demand_rate_constraint_{j}_{k}_for_total_delivery_quantity"
-                )
+        # for j in destinations:
+        #     for k in products:
+        #         model.addConstr(
+        #             T * dict_data['demand'][j][k] <= gp.quicksum(X[i,j,k] for i in compartments),
+        #             f"demand_rate_constraint_{j}_{k}_for_total_delivery_quantity"
+        #         )
             
         model.update()
         if gap:

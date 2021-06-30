@@ -1,69 +1,71 @@
-23:39:49 INFO: starting simulation...
-23:39:49 INFO: num_compartments: 3
-23:39:49 INFO: num_products: 3
-23:39:49 INFO: num_destinations: 2
-23:39:49 INFO: capacity_compartments: [719.47385196 855.29974426 766.68091999]
-23:39:49 INFO: size_package: [23.2289755  22.50331838 20.6794557 ]
-23:39:49 INFO: demand: [array([11., 15., 18.]), array([10., 15., 16.])]
-23:39:49 INFO: simulation end
-23:39:49 INFO: getting data from instance...
-23:39:49 INFO: SimpleTruckLoadingProblem
-23:39:49 INFO: Academic license - for non-commercial use only - expires 2021-08-08
-23:39:49 INFO: Using license file C:\Users\54498\gurobi.lic
-23:39:49 INFO: Changed value of parameter MIPgap to 0.001
-23:39:49 INFO:    Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
-23:39:49 INFO: Changed value of parameter TimeLimit to 5.0
-23:39:49 INFO:    Prev: inf  Min: 0.0  Max: inf  Default: inf
-23:39:49 INFO: Parameter OutputFlag unchanged
-23:39:49 INFO:    Value: 1  Min: 0  Max: 1  Default: 1
-23:39:49 INFO: Changed value of parameter LogFile to ./logs/gurobi.log
-23:39:49 INFO:    Prev:   Default: 
-23:39:49 INFO: Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
-23:39:49 INFO: Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-23:39:49 INFO: Optimize a model with 9 rows, 19 columns and 42 nonzeros
-23:39:49 INFO: Model fingerprint: 0xeb5347a2
-23:39:49 INFO: Variable types: 1 continuous, 18 integer (0 binary)
-23:39:49 INFO: Coefficient statistics:
-23:39:49 INFO:   Matrix range     [1e+00, 2e+01]
-23:39:49 INFO:   Objective range  [1e+00, 1e+00]
-23:39:49 INFO:   Bounds range     [0e+00, 0e+00]
-23:39:49 INFO:   RHS range        [7e+02, 9e+02]
-23:39:49 INFO: Found heuristic solution: objective -0.0000000
-23:39:49 INFO: Presolve time: 0.00s
-23:39:49 INFO: Presolved: 9 rows, 19 columns, 42 nonzeros
-23:39:49 INFO: Variable types: 1 continuous, 18 integer (0 binary)
-23:39:49 INFO: 
-23:39:49 INFO: Root relaxation: objective 1.254792e+00, 13 iterations, 0.00 seconds
-23:39:49 INFO: 
-23:39:49 INFO:     Nodes    |    Current Node    |     Objective Bounds      |     Work
-23:39:49 INFO:  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
-23:39:49 INFO: 
-23:39:49 INFO:      0     0    1.25479    0    8   -0.00000    1.25479      -     -    0s
-23:39:49 INFO: H    0     0                       1.0909091    1.25479  15.0%     -    0s
-23:39:49 INFO: H    0     0                       1.1666667    1.25479  7.55%     -    0s
-23:39:49 INFO: H    0     0                       1.2000000    1.25479  4.57%     -    0s
-23:39:49 INFO:      0     0    1.24400    0    8    1.20000    1.24400  3.67%     -    0s
-23:39:49 INFO: H    0     0                       1.2000000    1.24400  3.67%     -    0s
-23:39:49 INFO:      0     0    1.23361    0   10    1.20000    1.23361  2.80%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   10    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   10    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   11    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   11    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   11    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     0    1.23320    0   11    1.20000    1.23320  2.77%     -    0s
-23:39:49 INFO:      0     2    1.23320    0    9    1.20000    1.23320  2.77%     -    0s
-23:39:50 INFO: H 1657   805                       1.2000000    1.20938  0.78%   1.1    0s
-23:39:50 INFO: H 1659   767                       1.2000000    1.20938  0.78%   1.1    0s
-23:39:50 INFO: H 1659   728                       1.2000000    1.20938  0.78%   1.1    0s
-23:39:50 INFO: 
-23:39:50 INFO: Cutting planes:
-23:39:50 INFO:   Gomory: 3
-23:39:50 INFO:   MIR: 7
-23:39:50 INFO: 
-23:39:50 INFO: Explored 40761 nodes (54902 simplex iterations) in 0.74 seconds
-23:39:50 INFO: Thread count was 8 (of 8 available processors)
-23:39:50 INFO: 
-23:39:50 INFO: Solution count 8: 1.2 1.2 1.2 ... -0
-23:39:50 INFO: 
-23:39:50 INFO: Optimal solution found (tolerance 1.00e-03)
-23:39:50 INFO: Best objective 1.200000000000e+00, best bound 1.200000000000e+00, gap 0.0000%
+01:13:57 INFO: starting simulation...
+01:13:57 INFO: num_compartments: 3
+01:13:57 INFO: num_products: 3
+01:13:57 INFO: num_destinations: 2
+01:13:57 INFO: capacity_compartments: [809.25457864 838.27923024 899.53804867]
+01:13:57 INFO: size_package: [18.27155653 23.43194958 20.27262293]
+01:13:57 INFO: demand: [array([16.,  7., 20.]), array([15.,  8., 16.])]
+01:13:57 INFO: simulation end
+01:13:57 INFO: getting data from instance...
+01:13:57 INFO: SimpleTruckLoadingProblem
+01:13:57 INFO: Academic license - for non-commercial use only - expires 2021-08-08
+01:13:57 INFO: Using license file C:\Users\54498\gurobi.lic
+01:13:57 INFO: Changed value of parameter MIPgap to 0.001
+01:13:57 INFO:    Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+01:13:57 INFO: Changed value of parameter TimeLimit to 5.0
+01:13:57 INFO:    Prev: inf  Min: 0.0  Max: inf  Default: inf
+01:13:57 INFO: Parameter OutputFlag unchanged
+01:13:57 INFO:    Value: 1  Min: 0  Max: 1  Default: 1
+01:13:57 INFO: Changed value of parameter LogFile to ./logs/gurobi.log
+01:13:57 INFO:    Prev:   Default: 
+01:13:57 INFO: Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+01:13:57 INFO: Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+01:13:57 INFO: Optimize a model with 9 rows, 19 columns and 42 nonzeros
+01:13:57 INFO: Model fingerprint: 0xdde3ff28
+01:13:57 INFO: Variable types: 1 continuous, 18 integer (0 binary)
+01:13:57 INFO: Coefficient statistics:
+01:13:57 INFO:   Matrix range     [1e+00, 2e+01]
+01:13:57 INFO:   Objective range  [1e+00, 1e+00]
+01:13:57 INFO:   Bounds range     [0e+00, 0e+00]
+01:13:57 INFO:   RHS range        [8e+02, 9e+02]
+01:13:57 INFO: Found heuristic solution: objective -0.0000000
+01:13:57 INFO: Presolve time: 0.00s
+01:13:57 INFO: Presolved: 9 rows, 19 columns, 42 nonzeros
+01:13:57 INFO: Variable types: 1 continuous, 18 integer (0 binary)
+01:13:57 INFO: 
+01:13:57 INFO: Root relaxation: objective 1.545824e+00, 16 iterations, 0.00 seconds
+01:13:57 INFO: 
+01:13:57 INFO:     Nodes    |    Current Node    |     Objective Bounds      |     Work
+01:13:57 INFO:  Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+01:13:57 INFO: 
+01:13:57 INFO:      0     0    1.54582    0    8   -0.00000    1.54582      -     -    0s
+01:13:57 INFO: H    0     0                       1.1428571    1.54582  35.3%     -    0s
+01:13:57 INFO: H    0     0                       1.3750000    1.54582  12.4%     -    0s
+01:13:57 INFO: H    0     0                       1.5000000    1.54582  3.05%     -    0s
+01:13:57 INFO:      0     0    1.53047    0    9    1.50000    1.53047  2.03%     -    0s
+01:13:57 INFO: H    0     0                       1.5000000    1.53047  2.03%     -    0s
+01:13:57 INFO:      0     0    1.52661    0    8    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     0    1.52661    0    8    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     0    1.52661    0    8    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     0    1.52661    0    9    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     0    1.52661    0   10    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     0    1.52661    0   10    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO:      0     2    1.52661    0   10    1.50000    1.52661  1.77%     -    0s
+01:13:57 INFO: H  864   443                       1.5000000    1.52661  1.77%   1.4    0s
+01:13:57 INFO: H 2362   996                       1.5000000    1.51190  0.79%   1.3    0s
+01:13:57 INFO: H 2377   957                       1.5000000    1.51190  0.79%   1.3    0s
+01:13:57 INFO: H 2379   910                       1.5000000    1.51190  0.79%   1.3    0s
+01:14:02 INFO:  339008 110387    1.50391  114    4    1.50000    1.50940  0.63%   1.3    5s
+01:14:02 INFO: 
+01:14:02 INFO: Cutting planes:
+01:14:02 INFO:   Gomory: 8
+01:14:02 INFO:   MIR: 10
+01:14:02 INFO:   StrongCG: 3
+01:14:02 INFO: 
+01:14:02 INFO: Explored 342602 nodes (455890 simplex iterations) in 5.03 seconds
+01:14:02 INFO: Thread count was 8 (of 8 available processors)
+01:14:02 INFO: 
+01:14:02 INFO: Solution count 9: 1.5 1.5 1.5 ... -0
+01:14:02 INFO: 
+01:14:02 INFO: Time limit reached
+01:14:02 INFO: Best objective 1.500000011011e+00, best bound 1.509252326657e+00, gap 0.6168%

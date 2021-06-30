@@ -17,11 +17,11 @@ class SimpleHeu():
         start = time.time()
         
         # sort the product package sizes from big to small and modify the demand accordingly
-        temp_list = np.sort(self.data['size_package'])[::-1]
-        idx_list = np.argsort(self.data['size_package'])[::-1]
-        self.data['size_package'] = temp_list
-        for j in range(self.data['num_destinations']):
-            self.data['demand'][j] = [self.data['demand'][j][i] for i in idx_list]
+        # temp_list = np.sort(self.data['size_package'])[::-1]
+        # idx_list = np.argsort(self.data['size_package'])[::-1]
+        # self.data['size_package'] = temp_list
+        # for j in range(self.data['num_destinations']):
+        #     self.data['demand'][j] = [self.data['demand'][j][i] for i in idx_list]
             
         C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"])
         sum_pk_djk = 0
@@ -70,6 +70,7 @@ class SimpleHeu():
         i = 0
         j = 0
         k = 0    
+        output = "yes"
         while True:
             if S_jk[j][k] >= D_jk[j][k]:
                 i = 0
@@ -80,6 +81,13 @@ class SimpleHeu():
                     if j > self.data['num_destinations']-1:
                         break
             else:
+                if i == self.data['num_compartments']:
+                    output = 'no'
+                    break
+                # a = self.data['size_package'][k]
+                # b = D_jk[j][k]
+                # c = S_jk[j][k]
+                # d = self.data['capacity_compartments'][i]
                 if self.data['size_package'][k] * (D_jk[j][k] - S_jk[j][k]) > self.data['capacity_compartments'][i]:
                     X[j][i][k] = int(self.data['capacity_compartments'][i] / self.data['size_package'][k])
                     S_jk[j][k] += X[j][i][k]
@@ -87,7 +95,7 @@ class SimpleHeu():
                 else:
                     X[j][i][k] = D_jk[j][k] - S_jk[j][k]
                     S_jk[j][k] += X[j][i][k]
-                    self.data['capacity_compartments'][i] -= self.data['size_package'][k] * (D_jk[j][k] - S_jk[j][k])
+                    self.data['capacity_compartments'][i] -= self.data['size_package'][k] * X[j][i][k]
                 i += 1
                 if i > self.data['num_compartments']-1:
                     k += 1
@@ -97,12 +105,12 @@ class SimpleHeu():
                         if j > self.data['num_destinations']-1:
                             break
         
-        output = "yes"
-        for j in  range(self.data['num_destinations']):
-            for k in range(self.data['num_products']):
-                if D_jk[j][k] > S_jk[j][k]:
-                    output = "no"
-                    break
+        if output == 'yes':
+            for j in  range(self.data['num_destinations']):
+                for k in range(self.data['num_products']):
+                    if D_jk[j][k] > S_jk[j][k]:
+                        output = "no"
+                        break
         if output == "yes":
             t_s = S_jk[0][0] / self.data['demand'][0][0]
             for j in  range(self.data['num_destinations']):

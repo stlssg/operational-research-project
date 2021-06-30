@@ -6,6 +6,7 @@ import numpy as np
 from simulator.instance import Instance
 from solver.simpleTruckLoading import SimpleTruckLoading
 from heuristic.simpleHeu import SimpleHeu
+from heuristic.addingOneByOneHeu import AddingOneByOneHeu
 from utility.plot_results import plot_result_and_comparison
 
 if __name__ == '__main__':
@@ -21,7 +22,7 @@ if __name__ == '__main__':
     sim_setting = json.load(fp)
     fp.close()
     
-    np.random.seed(0)
+    # np.random.seed(0)
     inst = Instance(sim_setting)
     dict_data = inst.get_data()
     print(dict_data)
@@ -41,37 +42,42 @@ if __name__ == '__main__':
     of_heu, sol_heu, comp_time_heu = heu_1.solve()
     print(of_heu, sol_heu, comp_time_heu)
     
-    # comparison for different seeds
-    result_exact = []
-    result_heu = []
-    result_gap = []
-    for seed in range(0,201):
-        np.random.seed(seed)
-        inst = Instance(sim_setting)
-        dict_data = inst.get_data()
-        print(dict_data)
+    # # comparison for different seeds
+    # result_exact = []
+    # result_heu = []
+    # result_gap = []
+    # for seed in range(0,201):
+    #     np.random.seed(seed)
+    #     inst = Instance(sim_setting)
+    #     dict_data = inst.get_data()
+    #     print(dict_data)
         
-        prb = SimpleTruckLoading()
-        of_exact, sol_exact, comp_time_exact = prb.solve(
-            dict_data,
-            time_limit = 5,
-            gap = 0.1 / 100,
-            verbose=True
-        )
-        print(of_exact, sol_exact, comp_time_exact)
+    #     prb = SimpleTruckLoading()
+    #     of_exact, sol_exact, comp_time_exact = prb.solve(
+    #         dict_data,
+    #         time_limit = 5,
+    #         gap = 0.1 / 100,
+    #         verbose=True
+    #     )
+    #     print(of_exact, sol_exact, comp_time_exact)
         
-        heu_1 = SimpleHeu(0.03, dict_data)
-        of_heu, sol_heu, comp_time_heu = heu_1.solve()
-        print(of_heu, sol_heu, comp_time_heu)
+    #     heu_1 = SimpleHeu(0.03, dict_data)
+    #     of_heu, sol_heu, comp_time_heu = heu_1.solve()
+    #     print(of_heu, sol_heu, comp_time_heu)
         
-        if of_exact != -1:
-            result_exact.append(of_exact)
-            result_heu.append(of_heu)
-            gap = (of_heu - of_exact) / of_exact * 100
-            result_gap.append(gap)
+    #     if of_exact != -1:
+    #         result_exact.append(of_exact)
+    #         result_heu.append(of_heu)
+    #         gap = (of_heu - of_exact) / of_exact * 100
+    #         result_gap.append(gap)
         
-    # plot for result and comparison
-    plot_result_and_comparison(result_exact, result_heu, result_gap)
+    # # plot for result and comparison
+    # plot_result_and_comparison(result_exact, result_heu, result_gap)
+    
+    # second heuristic method and solution
+    # heu_2 = AddingOneByOneHeu(dict_data)
+    # of_heu, sol_heu, comp_time_heu = heu_2.solve()
+    # print(of_heu, sol_heu, comp_time_heu)
 
     '''
     # printing results of a file

@@ -23,6 +23,7 @@ class Instance():
             sim_setting['num_products']
         )
         #self.size_package = [30.0, 10.0, 20.0]
+        # self.size_package = [8.0, 14.0, 30.0]
         self.demand = []
         for idx in range(sim_setting['num_destinations']):
             low_demand = random.randint(0,sim_setting['low_demand'])

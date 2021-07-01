@@ -8,6 +8,7 @@ from solver.simpleTruckLoading import SimpleTruckLoading
 from heuristic.simpleHeu import SimpleHeu
 from heuristic.addingOneByOneHeu import AddingOneByOneHeu
 from utility.plot_results import plot_result_and_comparison
+import copy
 
 if __name__ == '__main__':
     log_name = "./logs/main.log"
@@ -22,9 +23,11 @@ if __name__ == '__main__':
     sim_setting = json.load(fp)
     fp.close()
     
-    # np.random.seed(0)
+    np.random.seed(0)
     inst = Instance(sim_setting)
     dict_data = inst.get_data()
+    # d1 = copy.deepcopy(dict_data)
+    # d2 = copy.deepcopy(dict_data)
     print(dict_data)
     
     # exact solution from gurobi
@@ -37,10 +40,15 @@ if __name__ == '__main__':
     )
     print(of_exact, sol_exact, comp_time_exact)
     
-    # first heuristic method and solution
-    heu_1 = SimpleHeu(0.03, dict_data)
-    of_heu, sol_heu, comp_time_heu = heu_1.solve()
-    print(of_heu, sol_heu, comp_time_heu)
+    # # first heuristic method and solution
+    # heu_1 = SimpleHeu(0.03, dict_data)
+    # sortOrNot = True
+    # of_heu, sol_heu, comp_time_heu = heu_1.solve(sortOrNot)
+    # print(of_heu, sol_heu, comp_time_heu)
+    # heu_1_1 = SimpleHeu(0.03, d2)
+    # sortOrNot = False
+    # of_heu, sol_heu, comp_time_heu = heu_1_1.solve(sortOrNot)
+    # print(of_heu, sol_heu, comp_time_heu)
     
     # # comparison for different seeds
     # result_exact = []
@@ -68,16 +76,49 @@ if __name__ == '__main__':
     #     if of_exact != -1:
     #         result_exact.append(of_exact)
     #         result_heu.append(of_heu)
-    #         gap = (of_heu - of_exact) / of_exact * 100
+    #         gap = (of_exact - of_heu) / of_exact * 100
     #         result_gap.append(gap)
         
     # # plot for result and comparison
     # plot_result_and_comparison(result_exact, result_heu, result_gap)
     
     # second heuristic method and solution
-    # heu_2 = AddingOneByOneHeu(dict_data)
-    # of_heu, sol_heu, comp_time_heu = heu_2.solve()
-    # print(of_heu, sol_heu, comp_time_heu)
+    heu_2 = AddingOneByOneHeu(dict_data)
+    of_heu, sol_heu, comp_time_heu = heu_2.solve()
+    print(of_heu, sol_heu, comp_time_heu)
+    
+    # comparison for different seeds
+    result_exact = []
+    result_heu = []
+    result_gap = []
+    for seed in range(0,201):
+        print('seed!!!:  ', seed)
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        print(dict_data)
+        
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        print(of_exact, sol_exact, comp_time_exact)
+        
+        heu_2 = AddingOneByOneHeu(dict_data)
+        of_heu, sol_heu, comp_time_heu = heu_2.solve()
+        print(of_heu, sol_heu, comp_time_heu)
+        
+        if of_exact != -1:
+            result_exact.append(of_exact)
+            result_heu.append(of_heu)
+            gap = (of_exact - of_heu) / of_exact * 100
+            result_gap.append(gap)
+        
+    # plot for result and comparison
+    plot_result_and_comparison(result_exact, result_heu, result_gap)
 
     '''
     # printing results of a file

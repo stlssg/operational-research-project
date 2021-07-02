@@ -70,15 +70,15 @@ if __name__ == '__main__':
     np.random.seed(3)
     base = sim_setting['num_products'] * sim_setting['num_destinations']
     for idx in range(5):
-        temp_setteing = copy.deepcopy(sim_setting)
+        temp_setting = copy.deepcopy(sim_setting)
         inc_pro = idx * 3
         inc_des = idx * 2
-        temp_setteing['num_products'] += inc_pro
-        temp_setteing['num_destinations'] += inc_des
-        scale = (temp_setteing['num_products'] * temp_setteing['num_destinations']) / base
-        temp_setteing['low_capacity_compartments'] = int(temp_setteing['low_capacity_compartments'] * scale)
-        temp_setteing['high_capacity_compartments'] = int(temp_setteing['high_capacity_compartments'] * scale)
-        inst = Instance(temp_setteing)
+        temp_setting['num_products'] += inc_pro
+        temp_setting['num_destinations'] += inc_des
+        scale = (temp_setting['num_products'] * temp_setting['num_destinations']) / base
+        temp_setting['low_capacity_compartments'] = int(temp_setting['low_capacity_compartments'] * scale)
+        temp_setting['high_capacity_compartments'] = int(temp_setting['high_capacity_compartments'] * scale)
+        inst = Instance(temp_setting)
         dict_data = inst.get_data()
         d1 = copy.deepcopy(dict_data)
         d2 = copy.deepcopy(dict_data)

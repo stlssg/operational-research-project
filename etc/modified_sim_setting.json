@@ -1,0 +1,11 @@
+{
+	"num_compartments": 3,
+	"num_products": 10,
+	"num_destinations": 10,
+	"low_capacity_compartments": 12000, 
+	"high_capacity_compartments": 15000,
+	"low_size_package": 15,
+	"high_size_package": 25,
+	"low_demand": 10,
+	"high_demand": 30
+}

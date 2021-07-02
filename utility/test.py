@@ -1,11 +1,12 @@
-w = int(input())    #背包大小
-n = int(input())    #物品个数
+w = 10    #背包大小
+n = 5    #物品个数
 listWV = [[0,0]]
-listTemp = []
-for i in range(n):
-    listTemp = list(map(int, input().split()))  #借助临时list每次新增物品对应的list加入到listWV中
-    listWV.append(listTemp) #依次输入每个物品的重量与价值
-print(listWV)
+# listTemp = []
+# for i in range(n):
+#     listTemp = list(map(int, input().split()))  #借助临时list每次新增物品对应的list加入到listWV中
+#     listWV.append(listTemp) #依次输入每个物品的重量与价值
+# print(listWV)
+listWV += [[2,6],[5,3],[4,5],[2,4],[3,6]]
     
 # 建立价值数组，初始值均为0，目的是为了在value[0][j]与value[i][0]的情况为0，毕竟不放入物品或者背包容量为0的情况下，背包中的价值肯定为0，
 value = [[0 for i in range(w+1)] for j in range(n+1)]

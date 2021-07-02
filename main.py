@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
 import json
 import logging
 import numpy as np
@@ -20,7 +18,7 @@ if __name__ == '__main__':
         filemode='w'
      )
 
-    fp = open("./etc/sim_setting.json", 'r')
+    fp = open("./etc/modified_sim_setting.json", 'r')
     sim_setting = json.load(fp)
     fp.close()
     

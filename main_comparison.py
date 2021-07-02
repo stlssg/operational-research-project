@@ -65,7 +65,7 @@ if __name__ == '__main__':
     
     # comparison of heuristic w.r.t. exact solution with increasing dimension of parameters
     file_output = open("./results/comparison_gurobi&heu.csv", "w")
-    file_output.write("index, time gurobi, time heuristic1, gap1[%], time heuristic2, gap2[%], time heuristic3, gap3[%]\n")
+    file_output.write("index, time gurobi[s], time heuristic1[s], gap1[%], time heuristic2[s], gap2[%], time heuristic3[s], gap3[%]\n")
     
     np.random.seed(3)
     base = sim_setting['num_products'] * sim_setting['num_destinations']

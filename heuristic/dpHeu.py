@@ -39,7 +39,7 @@ class DP_Heu():
         end = time.time()
         comp_time = end - start
         return final_of, comp_time
-    
+            
     def sub_algorithm(self, data_input):
         data = copy.deepcopy(data_input)
         D_jk = []
@@ -104,4 +104,58 @@ class DP_Heu():
             return self.t_l, 'no'
         elif D == 0:
             return self.t_l, 'yes'
-               
+
+    # def sub_algorithm(self, data_input):
+    #     data = copy.deepcopy(data_input)
+    #     D_jk = []
+    #     for j in self.destinations:
+    #         temp = []
+    #         for k in self.products:
+    #             temp.append(math.ceil(data['demand'][j][k] * self.t_l))
+    #         D_jk.append(temp)
+    #     D_k = []
+    #     for k in self.products:
+    #         D_k.append(sum([D_jk[j][k] for j in self.destinations]))
+    #     num = D_k
+    #     weight = [math.ceil(data['size_package'][k]) for k in self.products]
+    #     value = copy.deepcopy(weight)
+        
+    #     for c in data['capacity_compartments']:
+    #         max_weight = int(c)
+
+    #         dp = np.zeros((len(weight)+1,max_weight+1),dtype=int)
+            
+    #         for i in range(1,len(weight)+1):
+    #             for j in range(1,max_weight+1):
+    #                 if weight[i-1] > j:
+    #                     dp[i][j] = dp[i-1][j]
+    #                 else:
+    #                     count = min(num[i-1],j//weight[i-1])
+    #                     dp[i][j] = dp[i-1][j]
+    #                     for k in range(1,count+1):
+    #                         temp = dp[i-1][j-k * weight[i-1]] + k * value[i-1]
+    #                         if temp > dp[i][j]:
+    #                             dp[i][j] = temp
+            
+    #         raw = len(weight)
+    #         col = max_weight
+    #         remain = dp[raw][col]
+    #         goods = [0,0,0]
+
+    #         while remain != 0:
+    #             if remain != dp[raw-1][col]:
+    #                 count = min(num[raw-1],col//weight[raw-1])
+    #                 for k in range(1,count+1):
+    #                     if dp[raw][col] - k * value[raw-1] == dp[raw-1][col-k * weight[raw-1]]:
+    #                         remain -= k * value[raw-1]
+    #                         col -= k * weight[raw-1]
+    #                         goods[raw-1] = k
+    #             raw -= 1
+    
+    #         for k in self.products:
+    #             num[k] -= goods[k]
+        
+    #     if sum(num) > 0:
+    #         return self.t_l, 'no'
+    #     elif sum(num) == 0:
+    #         return self.t_l, 'yes'

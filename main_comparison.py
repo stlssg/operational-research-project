@@ -108,3 +108,85 @@ if __name__ == '__main__':
         )
         
     file_output.close()
+    
+    # comparison with different input for exact solution
+    file_output = open("./results/comparison_gurobi_different_inputs.csv", "w")
+    file_output.write("descripsion, objective function result\n")
+    file_output.write("\n")
+    np.random.seed(0)
+    inst = Instance(sim_setting)
+    dict_data = inst.get_data()
+    
+    # case 1, all parameters are same except for compartment capacity
+    for reduction in range(1, 4):
+        temp_data = copy.deepcopy(dict_data)
+        for i in range(temp_data['num_compartments']):
+            temp_data['capacity_compartments'][i] = int(temp_data['capacity_compartments'][i] / reduction)
+            
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            temp_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        # print(of_exact, sol_exact, comp_time_exact)
+        file_output.write("{}, {}\n".format(list(temp_data['capacity_compartments']), of_exact))
+    file_output.write("\n")
+        
+    # case 2, all parameters are same except for product size being very distinct
+    temp_data = copy.deepcopy(dict_data)
+    
+    prb = SimpleTruckLoading()
+    of_exact, sol_exact, comp_time_exact = prb.solve(
+        temp_data,
+        time_limit = 5,
+        gap = 0.1 / 100,
+        verbose=True
+    )
+    # print(of_exact, sol_exact, comp_time_exact)
+    file_output.write("{}, {}\n".format(list(temp_data['size_package']), of_exact))
+    
+    temp = temp_data['size_package'][0] - 1
+    temp_data['size_package'][0] = 1
+    temp_data['size_package'][2] += temp
+    
+    prb = SimpleTruckLoading()
+    of_exact, sol_exact, comp_time_exact = prb.solve(
+        temp_data,
+        time_limit = 5,
+        gap = 0.1 / 100,
+        verbose=True
+    )
+    # print(of_exact, sol_exact, comp_time_exact)
+    file_output.write("{}, {}\n".format(list(temp_data['size_package']), of_exact))
+    file_output.write("\n")
+    
+    # case 3, all parameters are same except for demands being very distinct
+    temp_data = copy.deepcopy(dict_data)
+    prb = SimpleTruckLoading()
+    of_exact, sol_exact, comp_time_exact = prb.solve(
+        temp_data,
+        time_limit = 5,
+        gap = 0.1 / 100,
+        verbose=True
+    )
+    # print(of_exact, sol_exact, comp_time_exact)
+    file_output.write("{}, {}\n".format(list(temp_data['demand']), of_exact))
+    
+    for j in range(temp_data['num_destinations']):
+        temp = temp_data['demand'][j][0] - 1
+        temp_data['demand'][j][0] = 1
+        temp_data['demand'][j][2] += temp
+        
+    prb = SimpleTruckLoading()
+    of_exact, sol_exact, comp_time_exact = prb.solve(
+        temp_data,
+        time_limit = 5,
+        gap = 0.1 / 100,
+        verbose=True
+    )
+    # print(of_exact, sol_exact, comp_time_exact)
+    file_output.write("{}, {}\n".format(list(temp_data['demand']), of_exact))
+    
+    file_output.close()

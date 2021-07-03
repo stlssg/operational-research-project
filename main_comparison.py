@@ -21,47 +21,47 @@ if __name__ == '__main__':
     sim_setting = json.load(fp)
     fp.close()
     
-    # # comparison for different seeds
-    # result_gap_1 = []
-    # result_gap_2 = []
-    # result_gap_3 = []
-    # for seed in range(0,201):
-    #     np.random.seed(seed)
-    #     inst = Instance(sim_setting)
-    #     dict_data = inst.get_data()
-    #     d1 = copy.deepcopy(dict_data)
-    #     d2 = copy.deepcopy(dict_data)
-    #     d3 = copy.deepcopy(dict_data)
+    # comparison for different seeds
+    result_gap_1 = []
+    result_gap_2 = []
+    result_gap_3 = []
+    for seed in range(0,201):
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        d1 = copy.deepcopy(dict_data)
+        d2 = copy.deepcopy(dict_data)
+        d3 = copy.deepcopy(dict_data)
         
-    #     prb = SimpleTruckLoading()
-    #     of_exact, sol_exact, comp_time_exact = prb.solve(
-    #         dict_data,
-    #         time_limit = 5,
-    #         gap = 0.1 / 100,
-    #         verbose=True
-    #     )
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
         
-    #     heu_1 = SimulationHeu(0.03, d1)
-    #     of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
+        heu_1 = SimulationHeu(0.03, d1)
+        of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
         
-    #     heu_2 = AddingOneByOneHeu(d2)
-    #     of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
+        heu_2 = AddingOneByOneHeu(d2)
+        of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
         
-    #     heu_3 = DP_Heu(d3)
-    #     of_heu3, comp_time_heu3 = heu_3.solve()
+        heu_3 = DP_Heu(d3)
+        of_heu3, comp_time_heu3 = heu_3.solve()
         
-    #     if of_exact != -1:
-    #         gap1 = (of_exact - of_heu1) / of_exact * 100
-    #         gap2 = (of_exact - of_heu2) / of_exact * 100
-    #         gap3 = (of_exact - of_heu3) / of_exact * 100
-    #         result_gap_1.append(gap1)
-    #         result_gap_2.append(gap2)
-    #         result_gap_3.append(gap3)
+        if of_exact != -1:
+            gap1 = (of_exact - of_heu1) / of_exact * 100
+            gap2 = (of_exact - of_heu2) / of_exact * 100
+            gap3 = (of_exact - of_heu3) / of_exact * 100
+            result_gap_1.append(gap1)
+            result_gap_2.append(gap2)
+            result_gap_3.append(gap3)
         
-    # # plot comparison
-    # plot_result_and_comparison(result_gap_1, 'simulation and greedy heuristic')
-    # plot_result_and_comparison(result_gap_2, "simulation by 'adding' heuristic")
-    # plot_result_and_comparison(result_gap_3, 'partial dynamic programming heuristic')
+    # plot comparison
+    plot_result_and_comparison(result_gap_1, 'simulation and greedy heuristic')
+    plot_result_and_comparison(result_gap_2, "simulation by 'adding' heuristic")
+    plot_result_and_comparison(result_gap_3, 'partial dynamic programming heuristic')
     
     # comparison of heuristic w.r.t. exact solution with increasing dimension of parameters
     file_output = open("./results/comparison_gurobi&heu.csv", "w")

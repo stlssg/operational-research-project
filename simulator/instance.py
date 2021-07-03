@@ -11,17 +11,17 @@ class Instance():
         self.num_compartments = sim_setting['num_compartments']
         self.num_products = sim_setting['num_products']
         self.num_destinations = sim_setting['num_destinations']
-        self.capacity_compartments = np.random.uniform(
+        self.capacity_compartments = np.around(np.random.uniform(
             sim_setting['low_capacity_compartments'],
             sim_setting['high_capacity_compartments'],
             sim_setting['num_compartments']
-        )
+        ))
         #self.capacity_compartments = [905.0, 810.0, 805.0, 760.0]
-        self.size_package = np.random.uniform(
+        self.size_package = np.around(np.random.uniform(
             sim_setting['low_size_package'],
             sim_setting['high_size_package'],
             sim_setting['num_products']
-        )
+        ))
         #self.size_package = [30.0, 10.0, 20.0]
         # self.size_package = [8.0, 14.0, 30.0]
         self.demand = []

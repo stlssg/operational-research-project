@@ -70,7 +70,7 @@ class DP_Heu():
             idx_temp = [-1]
             for idx in range(demand_total):
                 if take[idx] == 0:
-                    listTemp = [math.ceil(S_l[idx]), math.ceil(S_l[idx])]  
+                    listTemp = [int(S_l[idx]), int(S_l[idx])]  
                     idx_temp.append(idx)
                     listWV.append(listTemp) 
                 

@@ -23,6 +23,7 @@ class AddingOneByOneHeu():
             self.demand_para.append(temp)
            
         self.comFullOrNot = [False for i in self.compartments]
+        self.comFull4Pro = [[0 for k in self.products] for i in self.compartments]
         self.proSatisfiedOrNot = []
         for j in self.destinations:
             for k in self.products:
@@ -61,6 +62,7 @@ class AddingOneByOneHeu():
                 for i in self.compartments:
                     if self.comFullOrNot[i]: continue
                     for k in self.products:
+                        if self.comFull4Pro[i][k] == 1: break
                         if (int(self.data["demand"][j][k]) == 0) or AddingOneByOneHeu.check_min_replenishment(self, j, k): continue
                         while True:
                             self.state[j][i][k] += self.demand_para[j][k]
@@ -97,6 +99,7 @@ class AddingOneByOneHeu():
             for k in self.products:
                 temp += self.state[j][idx_i][k] * self.data['size_package'][k]
         if (temp > self.data['capacity_compartments'][idx_i]) and (para == 1):
+            self.comFull4Pro[idx_i][idx_k] = 1
             self.comFullOrNot[idx_i] = True
             self.state[idx_j][idx_i][idx_k] -= 1
         elif (temp > self.data['capacity_compartments'][idx_i]) and (para > 1):

@@ -9,6 +9,13 @@ from heuristic.dpHeu import DP_Heu
 from utility.plot_results import plot_result_and_comparison
 import copy
 
+def idx_max(a, b, c):
+    output = [0,0,0]
+    if max([a,b,c]) == a: output[0] += 1
+    if max([a,b,c]) == b: output[1] += 1
+    if max([a,b,c]) == c: output[2] += 1
+    return output
+
 if __name__ == '__main__':
     log_name = "./logs/main.log"
     logging.basicConfig(
@@ -188,5 +195,97 @@ if __name__ == '__main__':
     )
     # print(of_exact, sol_exact, comp_time_exact)
     file_output.write("{}, {}\n".format(list(temp_data['demand']), of_exact))
+    
+    file_output.close()
+    
+    # worst case analysis
+    file_output = open("./results/worst_case_comparison_among_heuristics.csv", "w")
+    file_output.write("descripsion, number of higher result of heu1, number of higher result of heu2, number of higher result of heu3\n")
+    file_output.write("\n")
+    
+    # case 1, very distinct caompartment capacity with [200, 800, 1400]
+    num_higher_value = [0, 0, 0]
+    for seed in range(0, 101):
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        dict_data['capacity_compartments'] = [200, 800, 1400]
+        d1 = copy.deepcopy(dict_data)
+        d2 = copy.deepcopy(dict_data)
+        d3 = copy.deepcopy(dict_data)
+        
+        heu_1 = SimulationHeu(0.03, d1)
+        of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
+        
+        heu_2 = AddingOneByOneHeu(d2)
+        of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
+        
+        heu_3 = DP_Heu(d3)
+        of_heu3, comp_time_heu3 = heu_3.solve()
+        
+        temp = idx_max(of_heu1, of_heu2, of_heu3)
+        num_higher_value[0] += temp[0]
+        num_higher_value[1] += temp[1]
+        num_higher_value[2] += temp[2]
+        
+    file_output.write("{}, {}, {}, {}\n".format('distinct compartment capacity', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("\n")
+    
+    # case 2, very distinct package size
+    num_higher_value = [0, 0, 0]
+    for seed in range(0, 101):
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        dict_data['size_package'] = [1, 20, 39]
+        d1 = copy.deepcopy(dict_data)
+        d2 = copy.deepcopy(dict_data)
+        d3 = copy.deepcopy(dict_data)
+        
+        heu_1 = SimulationHeu(0.03, d1)
+        of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
+        
+        heu_2 = AddingOneByOneHeu(d2)
+        of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
+        
+        heu_3 = DP_Heu(d3)
+        of_heu3, comp_time_heu3 = heu_3.solve()
+        
+        temp = idx_max(of_heu1, of_heu2, of_heu3)
+        num_higher_value[0] += temp[0]
+        num_higher_value[1] += temp[1]
+        num_higher_value[2] += temp[2]
+        
+    file_output.write("{}, {}, {}, {}\n".format('distinct package size', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("\n")
+    
+    # case 3, very distinct demand
+    num_higher_value = [0, 0, 0]
+    for seed in range(0, 101):
+        np.random.seed(seed)
+        inst = Instance(sim_setting)
+        dict_data = inst.get_data()
+        dict_data['demand'][0] = [1, 10, 35]
+        dict_data['demand'][1] = [1, 15, 30]
+        d1 = copy.deepcopy(dict_data)
+        d2 = copy.deepcopy(dict_data)
+        d3 = copy.deepcopy(dict_data)
+        
+        heu_1 = SimulationHeu(0.03, d1)
+        of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
+        
+        heu_2 = AddingOneByOneHeu(d2)
+        of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
+        
+        heu_3 = DP_Heu(d3)
+        of_heu3, comp_time_heu3 = heu_3.solve()
+        
+        temp = idx_max(of_heu1, of_heu2, of_heu3)
+        num_higher_value[0] += temp[0]
+        num_higher_value[1] += temp[1]
+        num_higher_value[2] += temp[2]
+    
+    file_output.write("{}, {}, {}, {}\n".format('distinct demand', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("\n")
     
     file_output.close()

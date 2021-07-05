@@ -8,7 +8,8 @@ def plot_result_and_comparison(result_gap, name, result_exact=None, result_heu=N
     plt.hist(result_gap, bins=100, alpha=0.8)
     plt.xlabel('gap[%]')
     plt.ylabel("occurrence")
-    plt.title(f'histogram of gap for {name} method w.r.t. exact solution')
+    # plt.title(f'histogram of gap for {name} method w.r.t. exact solution')
+    plt.title(f'gap for {name}')
     plt.savefig(f"./results/hist_{name}.png")
     plt.close()
     

@@ -16,7 +16,7 @@ if __name__ == '__main__':
         format='%(asctime)s %(levelname)s: %(message)s',
         level=logging.INFO, datefmt="%H:%M:%S",
         filemode='w'
-     )
+    )
 
     fp = open("./etc/sim_setting.json", 'r')
     sim_setting = json.load(fp)

@@ -28,6 +28,8 @@ class MTMSolver(object):
         self.xl = [0 for i in range(self.n)]
         self.xr = [0 for i in range(self.n)]
         self.ct = 0
+        self.cl = 0
+        self.S = [[] for i in range(self.m)]
         for k in range(self.m):
             self.cr[k] = self.c[k]
             self.cl += self.c[k]
@@ -37,11 +39,11 @@ class MTMSolver(object):
             self.x[j] = -1
             self.jhuse[j] = 0
             self.Uj[j] = -1
-            self.sol = MTMSolver.SolveSingleKnapsack(self.p, self.w, self.ct, self.n)
+            self.sol = self.SolveSingleKnapsack(self.p, self.w, self.ct, self.n)
             self.U = self.sol[0]
             self.xr = self.sol[1]
             self.Ur = self.U
-  
+
     def SolveSingleKnapsack(self, profits, weights, capacity, n_items):
         p = profits
         w = weights

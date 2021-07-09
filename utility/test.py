@@ -73,3 +73,21 @@
 
 # dp = solution(8, [1,2,2], [6,10,20], [10,5,2]) # max_weight,weight,value,num
 # things(8, dp, [1,2,2], [6,10,20], [10,5,2])
+
+import json
+import copy
+
+fp = open("./etc/sim_setting.json", 'r')
+sim_setting = json.load(fp)
+fp.close()
+base = sim_setting['num_products'] * sim_setting['num_destinations']
+for idx in range(5):
+    temp_setting = copy.deepcopy(sim_setting)
+    inc_pro = idx * 3
+    inc_des = idx * 2
+    temp_setting['num_products'] += inc_pro
+    temp_setting['num_destinations'] += inc_des
+    scale = (temp_setting['num_products'] * temp_setting['num_destinations']) / base
+    temp_setting['low_capacity_compartments'] = int(temp_setting['low_capacity_compartments'] * scale)
+    temp_setting['high_capacity_compartments'] = int(temp_setting['high_capacity_compartments'] * scale)
+    print(temp_setting)

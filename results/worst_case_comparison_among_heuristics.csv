@@ -1,8 +1,8 @@
 descripsion, number of higher result of heu1, number of higher result of heu2, number of higher result of heu3
 
-distinct compartment capacity, 55, 17, 42
+distinct compartment capacity, 51, 25, 42
 
-distinct package size, 76, 31, 19
+distinct package size, 86, 35, 10
 
 distinct demand, 64, 0, 37
 

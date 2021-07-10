@@ -76,20 +76,23 @@ class SimulationHeu():
         j = 0
         k = 0    
         while True: # loading process
+            # if a certain product demand has been satisfied, then go to the next
             if S_jk[j][k] >= D_jk[j][k]:
                 i = 0
                 k += 1
+                # check whether all products have been considered and stop the loop when all destination have been examined
                 if k > data_temp['num_products']-1:
                     k = 0
                     j += 1
                     if j > data_temp['num_destinations']-1:
                         break
             else:
+                # load certain product to the compartment as much as possible, if the products cannot be exhausted, leave them to the next compartment
                 if data_temp['size_package'][k] * (D_jk[j][k] - S_jk[j][k]) > data_temp['capacity_compartments'][i]:
                     X[j][i][k] = int(data_temp['capacity_compartments'][i] / data_temp['size_package'][k])
                     S_jk[j][k] += X[j][i][k]
                     data_temp['capacity_compartments'][i] -= data_temp['size_package'][k] * X[j][i][k]
-                else:
+                else: # if all of them can be loaded then load them
                     X[j][i][k] = D_jk[j][k] - S_jk[j][k]
                     S_jk[j][k] += X[j][i][k]
                     data_temp['capacity_compartments'][i] -= data_temp['size_package'][k] * X[j][i][k]

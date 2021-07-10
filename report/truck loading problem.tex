@@ -396,8 +396,14 @@ At this point, we have completed the comparison in various ways and it is possib
 \item Simulation with greedy algorithm performs decently from both perspectives of statistical value and time complexity, but the stability has to be considered.
 \end{itemize}
 
-\subsection{Conclusion }
+\section{Conclusion }
+To begin with, through the comprehensive study and thorough analysis of the truck loading problem, we are eventually able to derive heuristic methods to acquire solutions without refering to the exact solver. In general, all the methods posted above provide potentially acceptable and reasonable results but one of them does not perform well enough especially when it comes to the worst scenarios. Meanwhile, the other two work with pro and con that can be further optimized. In particular, partial dynamic programming has a steady behaviour while simulation with greedy algorithm is much more efficient. 
 
+However, there is still a key point of truck loading problem that can be easily ignored, which is that just by loading or unloading \textbf{one} product, the optimized result of minimum replenishment time will be modified by a very small quantity since in most cases, one product does not contribute a lot with respect to the overall demand or supply. In other words, the difference between the optimized result and its consecutive sub-optimized result is too small with a tiny magnitude to be considered. Hence, although it is true that the result of these heuristic methods are acceptable from a statistical point of view, a decrement of, for example 0.1\% (which may represent a numerous number of products) in gap, can be actually considered as a huge improvement. For this reason, partial dynamic programming with a stable performance may be a better heuristic method even it is computationally expensive.
+
+Morevoer, it is obvious that for a time sensitive application with a high complexity, partial dynamic programming cannot be adopted. And simulation with greedy algorithm will play its dominant role in this region. Given the fact that as the dimension of parameters increases, Gurobi cannot even provide exact result and proceed for hours, this heuristic method is more significant, not to mention that the results are also acceptable.
+
+In conclusion, on one hand, since we are focusing on finding a good and fast heuristic method, simulation with greedy algorithm is the best one as a whole. On the other hand, refering to partial dynamic programming if time consumption is irrelevent. 
 
 \bibliographystyle{unsrt}  
 

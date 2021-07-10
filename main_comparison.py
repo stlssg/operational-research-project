@@ -200,11 +200,13 @@ if __name__ == '__main__':
     
     # worst case analysis
     file_output = open("./results/worst_case_comparison_among_heuristics.csv", "w")
-    file_output.write("descripsion, number of higher result of heu1, number of higher result of heu2, number of higher result of heu3\n")
+    file_output.write("descripsion, number of higher result/average gap of heu1, number of higher result/average gap of heu2, number of higher result/average gap of heu3\n")
     file_output.write("\n")
     
     # case 1, very distinct caompartment capacity with [200, 800, 1400]
     num_higher_value = [0, 0, 0]
+    avg_gap = [0,0,0]
+    time_non_minus_1 = 0
     for seed in range(0, 101):
         np.random.seed(seed)
         inst = Instance(sim_setting)
@@ -214,6 +216,14 @@ if __name__ == '__main__':
         d2 = copy.deepcopy(dict_data)
         d3 = copy.deepcopy(dict_data)
         
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        
         heu_1 = SimulationHeu(0.03, d1)
         of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
         
@@ -228,11 +238,20 @@ if __name__ == '__main__':
         num_higher_value[1] += temp[1]
         num_higher_value[2] += temp[2]
         
+        if of_exact != -1:
+            time_non_minus_1 += 1
+            avg_gap[0] += (of_exact - of_heu1) / of_exact * 100
+            avg_gap[1] += (of_exact - of_heu2) / of_exact * 100
+            avg_gap[2] += (of_exact - of_heu3) / of_exact * 100
+        
     file_output.write("{}, {}, {}, {}\n".format('distinct compartment capacity', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("{}, {}, {}, {}\n".format('[%]', avg_gap[0] / time_non_minus_1, avg_gap[1] / time_non_minus_1, avg_gap[2] / time_non_minus_1))
     file_output.write("\n")
     
     # case 2, very distinct package size
     num_higher_value = [0, 0, 0]
+    avg_gap = [0,0,0]
+    time_non_minus_1 = 0
     for seed in range(0, 101):
         np.random.seed(seed)
         inst = Instance(sim_setting)
@@ -242,6 +261,14 @@ if __name__ == '__main__':
         d2 = copy.deepcopy(dict_data)
         d3 = copy.deepcopy(dict_data)
         
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        
         heu_1 = SimulationHeu(0.03, d1)
         of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
         
@@ -256,11 +283,20 @@ if __name__ == '__main__':
         num_higher_value[1] += temp[1]
         num_higher_value[2] += temp[2]
         
+        if of_exact != -1:
+            time_non_minus_1 += 1
+            avg_gap[0] += (of_exact - of_heu1) / of_exact * 100
+            avg_gap[1] += (of_exact - of_heu2) / of_exact * 100
+            avg_gap[2] += (of_exact - of_heu3) / of_exact * 100
+        
     file_output.write("{}, {}, {}, {}\n".format('distinct package size', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("{}, {}, {}, {}\n".format('[%]', avg_gap[0] / time_non_minus_1, avg_gap[1] / time_non_minus_1, avg_gap[2] / time_non_minus_1))
     file_output.write("\n")
     
     # case 3, very distinct demand
     num_higher_value = [0, 0, 0]
+    avg_gap = [0,0,0]
+    time_non_minus_1 = 0
     for seed in range(0, 101):
         np.random.seed(seed)
         inst = Instance(sim_setting)
@@ -271,6 +307,14 @@ if __name__ == '__main__':
         d2 = copy.deepcopy(dict_data)
         d3 = copy.deepcopy(dict_data)
         
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        
         heu_1 = SimulationHeu(0.03, d1)
         of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
         
@@ -284,8 +328,62 @@ if __name__ == '__main__':
         num_higher_value[0] += temp[0]
         num_higher_value[1] += temp[1]
         num_higher_value[2] += temp[2]
+        
+        if of_exact != -1:
+            time_non_minus_1 += 1
+            avg_gap[0] += (of_exact - of_heu1) / of_exact * 100
+            avg_gap[1] += (of_exact - of_heu2) / of_exact * 100
+            avg_gap[2] += (of_exact - of_heu3) / of_exact * 100
     
     file_output.write("{}, {}, {}, {}\n".format('distinct demand', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("{}, {}, {}, {}\n".format('[%]', avg_gap[0] / time_non_minus_1, avg_gap[1] / time_non_minus_1, avg_gap[2] / time_non_minus_1))
+    file_output.write("\n")
+    
+    # case 4, very small compartment capacity
+    num_higher_value = [0, 0, 0]
+    avg_gap = [0,0,0]
+    time_non_minus_1 = 0
+    for seed in range(0, 101):
+        np.random.seed(seed)
+        temp_setting = copy.deepcopy(sim_setting)
+        temp_setting['low_capacity_compartments'] = 100
+        temp_setting['high_capacity_compartments'] = 200
+        inst = Instance(temp_setting)
+        dict_data = inst.get_data()
+        d1 = copy.deepcopy(dict_data)
+        d2 = copy.deepcopy(dict_data)
+        d3 = copy.deepcopy(dict_data)
+        
+        prb = SimpleTruckLoading()
+        of_exact, sol_exact, comp_time_exact = prb.solve(
+            dict_data,
+            time_limit = 5,
+            gap = 0.1 / 100,
+            verbose=True
+        )
+        
+        heu_1 = SimulationHeu(0.03, d1)
+        of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
+        
+        heu_2 = AddingOneByOneHeu(d2)
+        of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
+        
+        heu_3 = DP_Heu(d3)
+        of_heu3, comp_time_heu3 = heu_3.solve()
+        
+        temp = idx_max(of_heu1, of_heu2, of_heu3)
+        num_higher_value[0] += temp[0]
+        num_higher_value[1] += temp[1]
+        num_higher_value[2] += temp[2]
+        
+        if of_exact != -1:
+            time_non_minus_1 += 1
+            avg_gap[0] += (of_exact - of_heu1) / of_exact * 100
+            avg_gap[1] += (of_exact - of_heu2) / of_exact * 100
+            avg_gap[2] += (of_exact - of_heu3) / of_exact * 100
+    
+    file_output.write("{}, {}, {}, {}\n".format('small capacity', num_higher_value[0], num_higher_value[1], num_higher_value[2]))
+    file_output.write("{}, {}, {}, {}\n".format('[%]', avg_gap[0] / time_non_minus_1, avg_gap[1] / time_non_minus_1, avg_gap[2] / time_non_minus_1))
     file_output.write("\n")
     
     file_output.close()

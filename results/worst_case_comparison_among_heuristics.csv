@@ -1,8 +1,14 @@
-descripsion, number of higher result of heu1, number of higher result of heu2, number of higher result of heu3
+descripsion, number of higher result/average gap of heu1, number of higher result/average gap of heu2, number of higher result/average gap of heu3
 
-distinct compartment capacity, 51, 25, 42
+distinct compartment capacity, 55, 17, 42
+[%], 0.8773682731067881, 3.2154850490978775, 0.6514581281823577
 
-distinct package size, 86, 35, 10
+distinct package size, 76, 31, 19
+[%], 0.4932815349032111, 2.4086256982916443, 0.8372405841519704
 
 distinct demand, 64, 0, 37
+[%], 0.8720422637092587, 17.214750531706102, 0.9973537685097162
+
+small capacity, 56, 1, 45
+[%], 4.422347167748737, 40.06934963142968, 4.2621137371618545
 

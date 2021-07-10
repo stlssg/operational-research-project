@@ -9,7 +9,6 @@ import copy
 class SimulationHeu():
     def __init__(self, epsilong, dict_data):
         self.t_lb = 0.0 # lower bound
-        self.ite = 0 # iteration
         self.eps = epsilong # ending condition
         self.data = dict_data
         
@@ -25,7 +24,7 @@ class SimulationHeu():
             for j in range(self.data['num_destinations']):
                 self.data['demand'][j] = [self.data['demand'][j][i] for i in idx_list]
             
-        C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"])
+        C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"]) # get the totall capacity 
         sum_pk_djk = 0
         for k in range(self.data['num_products']):
             for j in range(self.data['num_destinations']):
@@ -33,17 +32,17 @@ class SimulationHeu():
         self.t_ub = C_total / sum_pk_djk # upper bound with relaxation
         self.t_l = (self.t_lb + self.t_ub) / 2
         
+        # Binary search algorithm
         while self.t_ub - self.t_lb > self.eps:
             of, sol_x, condition = SimulationHeu.sub_algorithm(self, self.data)
             if condition == 'yes': # there exists a feasible solution
                 self.t_lb = self.t_l
-                final_of = of
+                # only output the last feasible one
+                final_of = of 
                 final_sol = sol_x
-                final_condition = condition
             elif condition == 'no': # there's no feasible solutions
                 self.t_ub = self.t_l
             self.t_l = (self.t_lb + self.t_ub) / 2
-            self.ite += 1
         
         end = time.time()
         comp_time = end - start
@@ -63,7 +62,7 @@ class SimulationHeu():
             D_jk.append(temp_D)
             S_jk.append(temp_S)
             
-        X = []
+        X = [] # store the solution (loading condition)
         for j in range(data_temp['num_destinations']):
             temp_compartment = []
             for i in range(data_temp['num_compartments']):
@@ -76,7 +75,7 @@ class SimulationHeu():
         i = 0
         j = 0
         k = 0    
-        while True:
+        while True: # loading process
             if S_jk[j][k] >= D_jk[j][k]:
                 i = 0
                 k += 1
@@ -105,6 +104,7 @@ class SimulationHeu():
                             break
         
         output = "yes"
+        # checkout the ferasibility
         for j in  range(data_temp['num_destinations']):
             for k in range(data_temp['num_products']):
                 if D_jk[j][k] > S_jk[j][k]:

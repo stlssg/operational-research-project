@@ -9,6 +9,7 @@ from heuristic.dpHeu import DP_Heu
 from utility.plot_results import plot_result_and_comparison
 import copy
 
+# determine which heuristic gives the highest value and avoid ignoring the same highest value
 def idx_max(a, b, c):
     output = [0,0,0]
     if max([a,b,c]) == a: output[0] += 1
@@ -28,7 +29,7 @@ if __name__ == '__main__':
     sim_setting = json.load(fp)
     fp.close()
     
-    # comparison for different seeds
+    # comparison among exact solver and heuristic for 200 different seeds 
     result_gap_1 = []
     result_gap_2 = []
     result_gap_3 = []
@@ -57,8 +58,8 @@ if __name__ == '__main__':
         heu_3 = DP_Heu(d3)
         of_heu3, comp_time_heu3 = heu_3.solve()
         
-        if of_exact != -1:
-            gap1 = (of_exact - of_heu1) / of_exact * 100
+        if of_exact != -1: # in some cases gurobi cannot solve the problem with the constrain, so I skip them
+            gap1 = (of_exact - of_heu1) / of_exact * 100 
             gap2 = (of_exact - of_heu2) / of_exact * 100
             gap3 = (of_exact - of_heu3) / of_exact * 100
             result_gap_1.append(gap1)
@@ -75,14 +76,17 @@ if __name__ == '__main__':
     file_output.write("index, time gurobi[s], time heuristic1[s], gap1[%], time heuristic2[s], gap2[%], time heuristic3[s], gap3[%]\n")
     
     np.random.seed(10)
-    base = sim_setting['num_products'] * sim_setting['num_destinations']
+    # calculate a base which is the multiplication of default number of product and number of destination, to increase the capacity reasonably
+    base = sim_setting['num_products'] * sim_setting['num_destinations'] 
     for idx in range(5):
         temp_setting = copy.deepcopy(sim_setting)
-        inc_pro = idx * 3
-        inc_des = idx * 2
-        temp_setting['num_products'] += inc_pro
+        inc_pro = idx * 3 # increment for number of product at each iteration
+        inc_des = idx * 2 # increment for number of destination at each iteration
+        # increase the dimension
+        temp_setting['num_products'] += inc_pro 
         temp_setting['num_destinations'] += inc_des
-        scale = (temp_setting['num_products'] * temp_setting['num_destinations']) / base
+        # use current multiplication and the base to get how much to increase the capacity
+        scale = (temp_setting['num_products'] * temp_setting['num_destinations']) / base 
         temp_setting['low_capacity_compartments'] = int(temp_setting['low_capacity_compartments'] * scale)
         temp_setting['high_capacity_compartments'] = int(temp_setting['high_capacity_compartments'] * scale)
         inst = Instance(temp_setting)
@@ -128,7 +132,7 @@ if __name__ == '__main__':
     for reduction in range(1, 4):
         temp_data = copy.deepcopy(dict_data)
         for i in range(temp_data['num_compartments']):
-            temp_data['capacity_compartments'][i] = int(temp_data['capacity_compartments'][i] / reduction)
+            temp_data['capacity_compartments'][i] = int(temp_data['capacity_compartments'][i] / reduction) # reduce the capacity by dividing by 1,2,3
             
         prb = SimpleTruckLoading()
         of_exact, sol_exact, comp_time_exact = prb.solve(
@@ -137,7 +141,6 @@ if __name__ == '__main__':
             gap = 0.1 / 100,
             verbose=True
         )
-        # print(of_exact, sol_exact, comp_time_exact)
         file_output.write("{}, {}\n".format(list(temp_data['capacity_compartments']), of_exact))
     file_output.write("\n")
         
@@ -151,9 +154,9 @@ if __name__ == '__main__':
         gap = 0.1 / 100,
         verbose=True
     )
-    # print(of_exact, sol_exact, comp_time_exact)
     file_output.write("{}, {}\n".format(list(temp_data['size_package']), of_exact))
     
+    # reduce the first demand to 1 and increase the last with the reduction before
     temp = temp_data['size_package'][0] - 1
     temp_data['size_package'][0] = 1
     temp_data['size_package'][2] += temp
@@ -165,7 +168,6 @@ if __name__ == '__main__':
         gap = 0.1 / 100,
         verbose=True
     )
-    # print(of_exact, sol_exact, comp_time_exact)
     file_output.write("{}, {}\n".format(list(temp_data['size_package']), of_exact))
     file_output.write("\n")
     
@@ -178,9 +180,9 @@ if __name__ == '__main__':
         gap = 0.1 / 100,
         verbose=True
     )
-    # print(of_exact, sol_exact, comp_time_exact)
     file_output.write("{}, {}\n".format(list(temp_data['demand']), of_exact))
     
+    # same stedagy of reduction and increasing as in case 2
     for j in range(temp_data['num_destinations']):
         temp = temp_data['demand'][j][0] - 1
         temp_data['demand'][j][0] = 1
@@ -193,7 +195,6 @@ if __name__ == '__main__':
         gap = 0.1 / 100,
         verbose=True
     )
-    # print(of_exact, sol_exact, comp_time_exact)
     file_output.write("{}, {}\n".format(list(temp_data['demand']), of_exact))
     
     file_output.close()
@@ -211,7 +212,7 @@ if __name__ == '__main__':
         np.random.seed(seed)
         inst = Instance(sim_setting)
         dict_data = inst.get_data()
-        dict_data['capacity_compartments'] = [200, 800, 1400]
+        dict_data['capacity_compartments'] = [200, 800, 1400] # define the distinct input
         d1 = copy.deepcopy(dict_data)
         d2 = copy.deepcopy(dict_data)
         d3 = copy.deepcopy(dict_data)
@@ -240,6 +241,7 @@ if __name__ == '__main__':
         
         if of_exact != -1:
             time_non_minus_1 += 1
+            # get the overall gap and divide by number of trial later on
             avg_gap[0] += (of_exact - of_heu1) / of_exact * 100
             avg_gap[1] += (of_exact - of_heu2) / of_exact * 100
             avg_gap[2] += (of_exact - of_heu3) / of_exact * 100
@@ -256,7 +258,7 @@ if __name__ == '__main__':
         np.random.seed(seed)
         inst = Instance(sim_setting)
         dict_data = inst.get_data()
-        dict_data['size_package'] = [1, 20, 39]
+        dict_data['size_package'] = [1, 20, 39] # define the distinct input
         d1 = copy.deepcopy(dict_data)
         d2 = copy.deepcopy(dict_data)
         d3 = copy.deepcopy(dict_data)
@@ -301,7 +303,8 @@ if __name__ == '__main__':
         np.random.seed(seed)
         inst = Instance(sim_setting)
         dict_data = inst.get_data()
-        dict_data['demand'][0] = [1, 10, 35]
+        # define the distinct input
+        dict_data['demand'][0] = [1, 10, 35] 
         dict_data['demand'][1] = [1, 15, 30]
         d1 = copy.deepcopy(dict_data)
         d2 = copy.deepcopy(dict_data)
@@ -346,6 +349,7 @@ if __name__ == '__main__':
     for seed in range(0, 101):
         np.random.seed(seed)
         temp_setting = copy.deepcopy(sim_setting)
+        # define the distinct input
         temp_setting['low_capacity_compartments'] = 100
         temp_setting['high_capacity_compartments'] = 200
         inst = Instance(temp_setting)

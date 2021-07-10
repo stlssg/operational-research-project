@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
 
 
 def plot_result_and_comparison(result_gap, name, result_exact=None, result_heu=None):
+    
+    # output the gap occurence histogram with respect to seeds
     plt.figure()
     plt.hist(result_gap, bins=100, alpha=0.8)
     plt.xlabel('gap[%]')
@@ -13,6 +14,7 @@ def plot_result_and_comparison(result_gap, name, result_exact=None, result_heu=N
     plt.savefig(f"./results/hist_{name}.png")
     plt.close()
     
+    # useless but worth keeping
     # plt.figure()
     # plt.plot(result_exact, label = 'exact solution')
     # plt.plot(result_heu, label ='heuristic solution')

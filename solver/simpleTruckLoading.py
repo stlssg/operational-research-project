@@ -20,17 +20,20 @@ class SimpleTruckLoading():
         logging.info("{}".format(problem_name))
 
         model = gp.Model(problem_name)
+        # add variables of loading condition (solution)
         X = model.addVars(
             dict_data['num_compartments'], dict_data['num_destinations'], dict_data['num_products'],
             lb=0,
             vtype=GRB.INTEGER,
             name='X'
         )
+        # add a variable, the replenishment time
         T = model.addVar(lb = 0.0, vtype = GRB.CONTINUOUS, name = "replenishment_time")
         
         obj_funct = T
         model.setObjective(obj_funct, GRB.MAXIMIZE)
         
+        # add constrains
         for j in destinations:
             for k in products:
                 model.addConstr(
@@ -60,6 +63,7 @@ class SimpleTruckLoading():
         end = time.time()
         comp_time = end - start
         
+        # get solutions
         sol = []
         of = -1
         if model.status == GRB.Status.OPTIMAL:

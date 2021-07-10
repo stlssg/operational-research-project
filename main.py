@@ -40,22 +40,22 @@ if __name__ == '__main__':
     )
     print(of_exact, sol_exact, comp_time_exact)
     
-    # first heuristic method and solution
+    # results from heuristic method of simulation with greedy algorithm 
     heu_1 = SimulationHeu(0.03, d1)
     of_heu1, sol_heu1, comp_time_heu1 = heu_1.solve(True)
     print(of_heu1, sol_heu1, comp_time_heu1)
     
-    # second heuristic method and solution
+    # results from heuristic method of simulation with fair supply
     heu_2 = AddingOneByOneHeu(d2)
     of_heu2, sol_heu2, comp_time_heu2 = heu_2.solve()
     print(of_heu2, sol_heu2, comp_time_heu2)
     
-    # third heuristic method and solution
+    # results from heuristic method of partial dynamic programming
     heu_3 = DP_Heu(d3)
     of_heu3, comp_time_heu3 = heu_3.solve()
     print(of_heu3, comp_time_heu3)
 
-    # printing results of a file
+    # printing results in a file
     file_output = open("./results/basic_result_4_all_methods.csv", "w")
     file_output.write("method, objective function result, computational time, solution\n")
     file_output.write("{}, {}, {}, {}\n".format("exact_solution_from_gurobi", of_exact, comp_time_exact, sol_exact))

@@ -23,8 +23,9 @@ class Instance():
             sim_setting['num_products']
         ))
         #self.size_package = [30.0, 10.0, 20.0]
-        # self.size_package = [8.0, 14.0, 30.0]
+        #self.size_package = [8.0, 14.0, 30.0]
         self.demand = []
+        # for each destination, use the lower bound and upper bound to define local bounds for demand
         for idx in range(sim_setting['num_destinations']):
             low_demand = random.randint(0,sim_setting['low_demand'])
             high_demand = random.randint(sim_setting['low_demand']+1, sim_setting['high_demand'])

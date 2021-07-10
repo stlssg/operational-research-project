@@ -9,14 +9,13 @@ class DP_Heu():
     def __init__(self, data):
         self.data = data
         self.t_lb = 0.0 # lower bound
-        self.ite = 0 # iteration
         self.eps = 0.03 # ending condition
         self.compartments = range(self.data['num_compartments']) # i
         self.destinations = range(self.data['num_destinations']) # j
         self.products = range(self.data['num_products']) # k
     
     def solve(self):
-        C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"])
+        C_total = functools.reduce(lambda x, y: x+y, self.data["capacity_compartments"]) # get the totall capacity 
         sum_pk_djk = 0
         for k in range(self.data['num_products']):
             for j in range(self.data['num_destinations']):
@@ -26,6 +25,7 @@ class DP_Heu():
         
         start = time.time()
         
+        # Binary search algorithm
         while self.t_ub - self.t_lb > self.eps:
             of, condition = DP_Heu.sub_algorithm(self, self.data)
             if condition == 'yes': # there exists a feasible solution
@@ -34,7 +34,6 @@ class DP_Heu():
             elif condition == 'no': # there's no feasible solutions
                 self.t_ub = self.t_l
             self.t_l = (self.t_lb + self.t_ub) / 2
-            self.ite += 1
                 
         end = time.time()
         comp_time = end - start
@@ -42,6 +41,7 @@ class DP_Heu():
             
     def sub_algorithm(self, data_input):
         data = copy.deepcopy(data_input)
+        # the following is for calculating all the demand regradless the destination
         D_jk = []
         for j in self.destinations:
             temp = []
@@ -54,17 +54,20 @@ class DP_Heu():
         idx = 0
         S_l = []
         D = 0
+        # expand the demand to multiple single items with value equal to size
         for demand in D_k:
             S_l += [data['size_package'][idx] for i in range(demand)]
             idx += 1
             D += demand
         demand_total = D
-        take = [0 for i in range(D)]
+        take = [0 for i in range(D)] # store which one has been taken
         
-        sum_take = 0
+        sum_take = 0 # store how many have been taken
+        # perform DP for each compartment
         for c in data['capacity_compartments']:
             w = int(c)    
-            n = D    
+            n = D  
+            # store the tuple of value and size, but in this case they are the same  
             listWV = [[0,0]]
             listTemp = []
             idx_temp = [-1]
@@ -73,7 +76,8 @@ class DP_Heu():
                     listTemp = [int(S_l[idx]), int(S_l[idx])]  
                     idx_temp.append(idx)
                     listWV.append(listTemp) 
-                
+            
+            # perform the DP
             value = [[0 for i in range(w+1)] for j in range(n+1)]
             for i in range(1, n+1):
                 for j in range(1, w+1):
@@ -82,6 +86,7 @@ class DP_Heu():
                     else:  
                         value[i][j] = max(value[i-1][j], value[i-1][j-listWV[i][0]]+listWV[i][1])
 
+            # the following is to find the solution
             i = n
             j = w
             listInfo = [0 for i in range(n+1)]
@@ -96,66 +101,13 @@ class DP_Heu():
                     listFlag.append(i-1)
                     take[idx_temp[i]] = 1
             
+            # remove those that have been loaded
             D -= sum(take) 
             D += sum_take
             sum_take = sum(take)
         
+        # if there are products left, it means the compartment can not hold them in an optimal way => infeasible
         if D > 0:
             return self.t_l, 'no'
         elif D == 0:
             return self.t_l, 'yes'
-
-    # def sub_algorithm(self, data_input):
-    #     data = copy.deepcopy(data_input)
-    #     D_jk = []
-    #     for j in self.destinations:
-    #         temp = []
-    #         for k in self.products:
-    #             temp.append(math.ceil(data['demand'][j][k] * self.t_l))
-    #         D_jk.append(temp)
-    #     D_k = []
-    #     for k in self.products:
-    #         D_k.append(sum([D_jk[j][k] for j in self.destinations]))
-    #     num = D_k
-    #     weight = [math.ceil(data['size_package'][k]) for k in self.products]
-    #     value = copy.deepcopy(weight)
-        
-    #     for c in data['capacity_compartments']:
-    #         max_weight = int(c)
-
-    #         dp = np.zeros((len(weight)+1,max_weight+1),dtype=int)
-            
-    #         for i in range(1,len(weight)+1):
-    #             for j in range(1,max_weight+1):
-    #                 if weight[i-1] > j:
-    #                     dp[i][j] = dp[i-1][j]
-    #                 else:
-    #                     count = min(num[i-1],j//weight[i-1])
-    #                     dp[i][j] = dp[i-1][j]
-    #                     for k in range(1,count+1):
-    #                         temp = dp[i-1][j-k * weight[i-1]] + k * value[i-1]
-    #                         if temp > dp[i][j]:
-    #                             dp[i][j] = temp
-            
-    #         raw = len(weight)
-    #         col = max_weight
-    #         remain = dp[raw][col]
-    #         goods = [0,0,0]
-
-    #         while remain != 0:
-    #             if remain != dp[raw-1][col]:
-    #                 count = min(num[raw-1],col//weight[raw-1])
-    #                 for k in range(1,count+1):
-    #                     if dp[raw][col] - k * value[raw-1] == dp[raw-1][col-k * weight[raw-1]]:
-    #                         remain -= k * value[raw-1]
-    #                         col -= k * weight[raw-1]
-    #                         goods[raw-1] = k
-    #             raw -= 1
-    
-    #         for k in self.products:
-    #             num[k] -= goods[k]
-        
-    #     if sum(num) > 0:
-    #         return self.t_l, 'no'
-    #     elif sum(num) == 0:
-    #         return self.t_l, 'yes'

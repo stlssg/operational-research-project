@@ -268,8 +268,36 @@ Similar to PartialDP method, we have also used half-interval search algorithm to
 \subsubsection{Introduction}
 
 \subsubsection{Comparison with exact solution}
+The same comparisons have been proceeded and results are presented in Fig.\ref{fig:hist_sg} and Table.\ref{tab:exact_greedy}. In terms of gaps, there is a huge amount of gaps with value of 0\%, which means it is possible to reach a extremely precise result with respect to the exact solution, but the distribution of other gaps is relatively dispersive indicating a unstable performance. On top of that, the time comsumption is so small that can be ignored, even for a high compexity, which results in a hegemony in heuristic method choice if the computational time is the paramount consideration.
 
-\subsection{Summary }
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.7]{hist_sg.png}
+    \caption{histogram of gap between heuristic (Simulation with greedy algorithm) result and exact result for different random seeds}
+    \label{fig:hist_sg}
+\end{figure}
+
+\begin{table}[ht]
+ \caption{Compression of solution: Exact solver v.s Simulation with greedy algorithm}
+  \centering
+  \begin{tabular}{llll}
+    \toprule
+    \multicolumn{3}{c}{Execution time}                   \\
+    \cmidrule(r){2-3}
+    Index   & Gurobi[s]     & greedy[s]      & Gap[\%] \\
+    \midrule
+    1	&	0.048 	&	0.001 	&	0.00 	\\
+    2	&	0.066 	&	0.002 	&	0.00 	\\
+    3	&	0.052 	&	0.002 	&	0.97 	\\
+    4	&	0.498 	&	0.004 	&	0.41 	\\
+    5	&	0.627 	&	0.004 	&	0.35 	\\
+    \bottomrule
+  \end{tabular}
+  \label{tab:exact_greedy}
+\end{table}
+
+\subsection{Summary of heuristic methods}
+The ultimate goal is to find a fast and good heurist method to solve the truck loading problem. Besides the comparison between certain heuristic mtehod and the exact solver, the worst case performance is indeed an important indicator when it comes to the evaluation of heuristic methods. Futhermore, a general comparison taking into acount all the factors, among all the heuristic methods can be conducted to draw a conclusion.
 
 \subsubsection{Worst case analysis}
 
